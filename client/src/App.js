@@ -12,6 +12,7 @@ import InterviewPage from './views/Interview';
 import ThankYouPage from './views/ThankYouPage';
 import { NextUIProvider } from "@nextui-org/react";
 import Jobs from './views/Jobs';
+import VideoRecorder from './components/VideoRecorder';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/jobs" element={<Jobs/>} />
+            <Route path="/test" element={<VideoRecorder />} />
             {/* <Route path="/login" element={<Demo />} /> */}
             <Route path="/home" element={<Home />} />
             <Route path="/interview" element={<InterviewPage />} />

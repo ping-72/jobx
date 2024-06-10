@@ -8,21 +8,13 @@ import QuestionDisplay from "../components/interview/QuestionDisplay";
 import QuestionCategoryModal from "../components/interview/QuestionTypeModal";
 import SubmitIntervieModal from "../components/interview/SubmitInterviewModal";
 import Nav from "../components/core/Nav";
-
-// import TextInputWithMic from '../components/interview/TextInputWithMic';
-import SpeechToText from "../components/SpeechToText";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Flex } from "@tremor/react";
 import { Chip, Button, Tooltip, useDisclosure } from "@nextui-org/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowLeft,
-  faCheck,
-  faWaveSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
 
@@ -35,7 +27,6 @@ const InterviewPage = () => {
 
   const [isRecording, setIsRecording] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [isTextAreaDisabled, setIsTextAreaDisabled] = useState(true);
   const [isQuestionPrevMoved, setQuestionPrevMoved] = useState(false);
   const [textAreaClass, setTextAreaClass] = useState("h-32");
   const textareaRef = useRef(null);
@@ -44,34 +35,6 @@ const InterviewPage = () => {
     onOpen: onOpenSubmitModal,
     onClose: onCloseSubmitModal,
   } = useDisclosure();
-
-  const toggleRecording = () => {
-    setIsRecording(!isRecording);
-    // Setting up the text area height
-    if (!isRecording) {
-      setTextAreaClass("h-64");
-    } else {
-      setTextAreaClass("h-32");
-    }
-  };
-
-  const toggleTyping = () => {
-    console.log("clicking", isTyping);
-    setIsTyping(!isTyping);
-    setIsTextAreaDisabled(!isTextAreaDisabled);
-    // Setting up the text area height
-    if (!isTyping) {
-      setTextAreaClass("h-64");
-    } else {
-      setTextAreaClass("h-32");
-    }
-  };
-
-  const handleTranscription = (transcribedText) => {
-    const updatedUserAnswers = [...userAnswers];
-    updatedUserAnswers[currentQuestionIndex] += ` ${transcribedText}`;
-    setUserAnswers(updatedUserAnswers);
-  };
 
   useEffect(() => {
     console.log("inside useeffect interview");
@@ -100,14 +63,6 @@ const InterviewPage = () => {
       return;
     }
   }, []);
-
-  const handlePrevQuestion = () => {
-    console.log("Prev button clicked: ", currentQuestionIndex);
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setQuestionPrevMoved(true);
-    }
-  };
 
   const handleNextQuestion = () => {
     console.log("Next button clicked: ", currentQuestionIndex);
@@ -155,7 +110,6 @@ const InterviewPage = () => {
   };
 
   const questionsCount = questions.length;
-  const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   return (
@@ -163,7 +117,10 @@ const InterviewPage = () => {
       <Nav isInterviewPage={true} />
       <div
         className="bg-gray-100 flex flex-col items-center justify-center"
-        style={{ height: "calc(100vh - 65px)" }}
+        style={{
+          height: "calc(100vh - 65px)",
+          paddingTop: "400px",
+        }}
       >
         <div className="bg-white m-3 p-2 lg:p-4 rounded-xl shadow-xl border-1 border-slate-50 max-w-4xl w-11/12 lg:w-full flex flex-col">
           {!isRecording ? (
@@ -210,46 +167,11 @@ const InterviewPage = () => {
             currentQuestionIndex={currentQuestionIndex}
           />
 
-          {isRecording && (
-            <div className="mt-4 relative flex justify-center items-center">
-              <div className="transribe_shadow rounded-xl ">
-                <div className="w-full rounded-xl text-slate-500 bg-slate-50 p-2 px-4 text-xs font-medium">
-                  {" "}
-                  <FontAwesomeIcon icon={faWaveSquare} size="sm" /> transcribing
-                  your answer ...
-                </div>
-              </div>
-            </div>
-          )}
-
-          <SpeechToText
-            onTranscription={handleTranscription}
-            isRecording={isRecording}
-          />
+          <VideoRecorder />
 
           <Flex className="gap-4 p-0 py-1 mt-3 w-full justify-end">
-            {/* <div className="flex justify-center items-center mt-4">
-             <VideoRecorder />
-           </div> */}
             {!isRecording && !isTyping ? (
               <div>
-                {isFirstQuestion ? (
-                  <></>
-                ) : (
-                  <Tooltip
-                    showArrow={true}
-                    content="Previous Question"
-                    placement="bottom"
-                  >
-                    <Button
-                      size="sm"
-                      className="py-6 lg:p-8 text-md w-0 lg:w-auto lg:text-lg mx-2 font-medium border-blue-600 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-1"
-                      onClick={handlePrevQuestion}
-                    >
-                      <FontAwesomeIcon icon={faArrowLeft} size="lg" />
-                    </Button>
-                  </Tooltip>
-                )}
                 <Tooltip
                   showArrow={true}
                   content={

@@ -1,7 +1,6 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
-import Webcam from 'react-webcam';
-import QuestionDisplay from './interview/QuestionDisplay'; // Make sure to update the path as needed
-import axios from 'axios';
+import { useRef, useState, useCallback, useEffect } from "react";
+import Webcam from "react-webcam";
+import axios from "axios";
 
 const VideoRecorder = () => {
   const webcamRef = useRef(null);
@@ -12,88 +11,69 @@ const VideoRecorder = () => {
   const [recordingTime, setRecordingTime] = useState(150); // 2 mins 30 seconds for recording
   const [timerActive, setTimerActive] = useState(true);
   const [showRecordingIcon, setShowRecordingIcon] = useState(false);
-  
-  const question = "Can you tell us about a challenging project you worked on?"; // Example question
-  const currentQuestionIndex = 0;
 
-//   const handleDownload = useCallback(() => {
-//     if (recordedChunks.length > 0) {
-//       const blob = new Blob(recordedChunks, { type: 'video/webm' });
-//       const url = URL.createObjectURL(blob);
-//       const a = document.createElement('a');
-//       document.body.appendChild(a);
-//       a.style.display = 'none';
-//       a.href = url;
-//       a.download = 'react-webcam-stream-capture.webm';
-//       a.click();
-//       window.URL.revokeObjectURL(url);
-//       setRecordedChunks([]);
-//       document.body.removeChild(a);
-//     } else {
-//       console.log('No recorded chunks to download');
-//     }
-//   }, [recordedChunks]);
+  const handleDataAvailable = useCallback(
+    ({ data }) => {
+      if (data.size > 0) {
+        setRecordedChunks((prev) => [...prev, data]);
+      }
+    },
+    [recordedChunks]
+  );
 
-const handleDataAvailable = useCallback(
-  ({ data }) => {
-    if (data.size > 0) {
-      setRecordedChunks((prev) => [...prev, data]);
+  const handleStopCaptureClick = useCallback(() => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setCapturing(false);
+      setRecordingTime(0);
+      setShowRecordingIcon(false);
+      setTimerActive(false);
     }
-  },
-  [recordedChunks]
-);
-
-const handleStopCaptureClick = useCallback(() => {
-  if (mediaRecorderRef.current) {
-    mediaRecorderRef.current.stop();
-    setCapturing(false);
-    setRecordingTime(0);
-    setShowRecordingIcon(false);
-    setTimerActive(false);
-  }
-}, []);
-
+  }, []);
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
     setThinkingTime(0);
     setShowRecordingIcon(true);
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-      mimeType: 'video/webm'
+      mimeType: "video/webm",
     });
-    mediaRecorderRef.current.addEventListener('dataavailable', handleDataAvailable);
+    mediaRecorderRef.current.addEventListener(
+      "dataavailable",
+      handleDataAvailable
+    );
     mediaRecorderRef.current.start();
   }, [handleDataAvailable]);
 
   const uploadToAzure = async (blob) => {
     try {
-      const userId = '0'; // Replace with actual userId
-      const questionId = '0'; // Replace with actual questionId
+      const userId = "0"; // Replace with actual userId
+      const questionId = "0"; // Replace with actual questionId
 
       // Fetch the SAS URL from your server
-      const response = await axios.get(`http://localhost:3004/api/azure/sas/${userId}/${questionId}`);
+      const response = await axios.get(
+        `http://localhost:3004/api/azure/sas/${userId}/${questionId}`
+      );
       const { sasUrl } = response.data;
 
-      console.log('SAS URL:', sasUrl);
+      console.log("SAS URL:", sasUrl);
 
       // Upload the blob to Azure Blob Storage using the SAS URL
       await axios.put(sasUrl, blob, {
         headers: {
-          'x-ms-blob-type': 'BlockBlob'
-        }
+          "x-ms-blob-type": "BlockBlob",
+        },
       });
 
-      console.log('Upload to Azure Blob Storage successful');
+      console.log("Upload to Azure Blob Storage successful");
     } catch (error) {
-      console.error('Error uploading to Azure Blob Storage:', error);
+      console.error("Error uploading to Azure Blob Storage:", error);
     }
   };
 
   useEffect(() => {
     if (!capturing && recordedChunks.length > 0) {
-    //   handleDownload();
-      const blob = new Blob(recordedChunks, { type: 'video/webm' });
-    //   uploadToAzure(blob);
+      const blob = new Blob(recordedChunks, { type: "video/webm" });
       setRecordedChunks([]);
     }
   }, [recordedChunks, capturing]);
@@ -115,17 +95,24 @@ const handleStopCaptureClick = useCallback(() => {
 
       return () => clearTimeout(thinkingTimer);
     }
-  }, [thinkingTime, recordingTime, timerActive, capturing, handleStartCaptureClick, handleStopCaptureClick]);
+  }, [
+    thinkingTime,
+    recordingTime,
+    timerActive,
+    capturing,
+    handleStartCaptureClick,
+    handleStopCaptureClick,
+  ]);
 
   useEffect(() => {
     let interval;
     if (timerActive && thinkingTime > 0) {
       interval = setInterval(() => {
-        setThinkingTime(prev => prev - 1);
+        setThinkingTime((prev) => prev - 1);
       }, 1000);
     } else if (timerActive && recordingTime > 0 && capturing) {
       interval = setInterval(() => {
-        setRecordingTime(prev => prev - 1);
+        setRecordingTime((prev) => prev - 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -133,17 +120,14 @@ const handleStopCaptureClick = useCallback(() => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <QuestionDisplay 
-        question={question} 
-        currentQuestionIndex={currentQuestionIndex} 
-        skipAnimate={false} 
-      />
-      <div className="mb-4 relative">
-        <Webcam 
-          audio={true} 
-          ref={webcamRef} 
-          muted={true} 
-          className="rounded-lg shadow-lg border-10 border-gray-300" 
+      <div className="w-80% mb-4 relative">
+        {" "}
+        {/* Updated styling */}
+        <Webcam
+          audio={true}
+          ref={webcamRef}
+          muted={true}
+          className="rounded-lg shadow-lg border-10 border-gray-300"
         />
         {showRecordingIcon && (
           <div className="absolute top-0 left-0 m-2 p-2 bg-red-600 text-white rounded-full">
@@ -151,36 +135,29 @@ const handleStopCaptureClick = useCallback(() => {
           </div>
         )}
         <div className="absolute bottom-0 left-0 m-2 p-2 bg-white text-black rounded-lg">
-            {thinkingTime > 0 && !capturing
-                ? `Recording will start in ${thinkingTime} seconds`
-                : recordingTime > 0 && `Recording will stop in ${recordingTime} seconds`}
+          {thinkingTime > 0 && !capturing
+            ? `Recording will start in ${thinkingTime} seconds`
+            : recordingTime > 0 &&
+              `Recording will stop in ${recordingTime} seconds`}
         </div>
       </div>
       <div className="flex space-x-4">
         {thinkingTime > 0 && !capturing && (
-          <button 
-            onClick={handleStartCaptureClick} 
+          <button
+            onClick={handleStartCaptureClick}
             className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300"
           >
             Start Capture
           </button>
         )}
         {recordingTime > 0 && capturing && (
-          <button 
-            onClick={handleStopCaptureClick} 
+          <button
+            onClick={handleStopCaptureClick}
             className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-300"
           >
             Stop Capture
           </button>
         )}
-        {/* {recordedChunks.length > 0 && (
-          <button 
-            onClick={handleDownload} 
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-          >
-            Download
-          </button>
-        )} */}
       </div>
     </div>
   );

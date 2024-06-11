@@ -24,12 +24,7 @@ const InterviewPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const navigate = useNavigate();
-
-  const [isRecording, setIsRecording] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
   const [isQuestionPrevMoved, setQuestionPrevMoved] = useState(false);
-  const [textAreaClass, setTextAreaClass] = useState("h-32");
-  const textareaRef = useRef(null);
   const {
     isOpen: isSubmitModalOpen,
     onOpen: onOpenSubmitModal,
@@ -113,102 +108,85 @@ const InterviewPage = () => {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   return (
-    <>
-      <Nav isInterviewPage={true} />
-      <div
-        className="bg-gray-100 flex flex-col items-center justify-center"
-        style={{
-          height: "calc(100vh - 65px)",
-          paddingTop: "400px",
-        }}
-      >
-        <div className="bg-white m-3 p-2 lg:p-4 rounded-xl shadow-xl border-1 border-slate-50 max-w-4xl w-11/12 lg:w-full flex flex-col">
-          {!isRecording ? (
-            <Flex className="gap-4 p-0 py-1 mb-3 w-full justify-between">
+    <div className="flex flex-col items-center justify-center">
+      <Nav isInterviewPage={true} isLandingPage={false} />
+      <div className="bg-white m-3 p-2 lg:p-4 rounded-xl shadow-xl border-1 border-slate-50 max-w-6xl w-11/12  lg:w-full flex flex-col ">
+        <Flex className="gap-4 p-0 py-1 mb-3 w-full justify-between">
+          {" "}
+          <div>
+            <Chip
+              variant="shadow"
+              classNames={{
+                base: "border-gray/50 border-1 rounded-lg bg-white shadow-slate-200/30",
+                content: "text-slate-500 font-normal py-1 text-xs lg:text-sm",
+              }}
+            >
               {" "}
-              {/* Modified line */}
-              <div>
-                <Chip
-                  variant="shadow"
-                  classNames={{
-                    base: "border-gray/50 border-1 rounded-lg bg-white shadow-slate-200/30",
-                    content:
-                      "text-slate-500 font-normal py-1 text-xs lg:text-sm",
-                  }}
-                >
-                  {" "}
-                  Question{" "}
-                  <span style={{ letterSpacing: "1.6px" }}>
-                    {currentQuestionIndex + 1}/{questionsCount}
-                  </span>
-                </Chip>
-              </div>
-              <div>
-                <QuestionCategoryModal
-                  type={
-                    questions[currentQuestionIndex]
-                      ? questions[currentQuestionIndex].type
-                      : ""
-                  }
-                />
-              </div>
-            </Flex>
-          ) : (
-            <></>
-          )}
+              Question{" "}
+              <span style={{ letterSpacing: "1.6px" }}>
+                {currentQuestionIndex + 1}/{questionsCount}
+              </span>
+            </Chip>
+          </div>
+          <div>
+            <QuestionCategoryModal
+              type={
+                questions[currentQuestionIndex]
+                  ? questions[currentQuestionIndex].type
+                  : ""
+              }
+            />
+          </div>
+        </Flex>
 
-          <QuestionDisplay
-            question={
-              questions[currentQuestionIndex]
-                ? questions[currentQuestionIndex].question
-                : ""
-            }
-            skipAnimate={isQuestionPrevMoved}
-            currentQuestionIndex={currentQuestionIndex}
-          />
+        <QuestionDisplay
+          question={
+            questions[currentQuestionIndex]
+              ? questions[currentQuestionIndex].question
+              : ""
+          }
+          skipAnimate={isQuestionPrevMoved}
+          currentQuestionIndex={currentQuestionIndex}
+        />
 
-          <VideoRecorder />
+        <VideoRecorder />
 
-          <Flex className="gap-4 p-0 py-1 mt-3 w-full justify-end">
-            {!isRecording && !isTyping ? (
-              <div>
-                <Tooltip
-                  showArrow={true}
-                  content={
-                    isLastQuestion ? "Submit Interview" : "Next Question"
-                  }
-                  placement="bottom"
-                >
-                  <Button
-                    size="sm"
-                    className=" py-6 lg:p-8 text-md w-0 lg:w-auto lg:text-lg font-medium border-blue-600 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-1"
-                    onPress={
-                      isLastQuestion ? onOpenSubmitModal : handleNextQuestion
-                    }
-                  >
-                    {isLastQuestion ? (
-                      <>
-                        <FontAwesomeIcon icon={faCheck} size="lg" />
-                      </>
-                    ) : (
-                      <FontAwesomeIcon icon={faArrowRight} size="lg" />
-                    )}
-                  </Button>
-                </Tooltip>
-              </div>
-            ) : (
-              <></>
-            )}
-          </Flex>
-          <SubmitIntervieModal
-            isSubmitModalOpen={isSubmitModalOpen}
-            onOpenSubmitModal={onOpenSubmitModal}
-            onCloseSubmitModal={onCloseSubmitModal}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+        <Flex className="gap-4 p-0 py-1 mt-3 w-full justify-end">
+          <div>
+            <Tooltip
+              showArrow={true}
+              content={isLastQuestion ? "Submit Interview" : "Next Question"}
+              placement="bottom"
+            >
+              <Button
+                size="sm"
+                className=" py-6 lg:p-8 text-md w-0 lg:w-auto lg:text-lg font-medium border-blue-600 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-1"
+                onPress={
+                  isLastQuestion ? onOpenSubmitModal : handleNextQuestion
+                }
+              >
+                {isLastQuestion ? (
+                  <>
+                    <FontAwesomeIcon icon={faCheck} size="lg" />
+                  </>
+                ) : (
+                  <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                )}
+              </Button>
+            </Tooltip>
+          </div>
+        </Flex>
+        <SubmitIntervieModal
+          isSubmitModalOpen={isSubmitModalOpen}
+          onOpenSubmitModal={onOpenSubmitModal}
+          onCloseSubmitModal={onCloseSubmitModal}
+          handleSubmit={handleSubmit}
+        />
       </div>
-    </>
+      <footer className="text-center text-gray-500 text-xs mt-4">
+        <p>&copy; 2024 Job-X</p>
+      </footer>
+    </div>
   );
 };
 

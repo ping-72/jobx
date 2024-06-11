@@ -1,6 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
-import axios from "axios";
 
 const VideoRecorder = () => {
   const webcamRef = useRef(null);
@@ -44,32 +43,6 @@ const VideoRecorder = () => {
     );
     mediaRecorderRef.current.start();
   }, [handleDataAvailable]);
-
-  const uploadToAzure = async (blob) => {
-    try {
-      const userId = "0"; // Replace with actual userId
-      const questionId = "0"; // Replace with actual questionId
-
-      // Fetch the SAS URL from your server
-      const response = await axios.get(
-        `http://localhost:3004/api/azure/sas/${userId}/${questionId}`
-      );
-      const { sasUrl } = response.data;
-
-      console.log("SAS URL:", sasUrl);
-
-      // Upload the blob to Azure Blob Storage using the SAS URL
-      await axios.put(sasUrl, blob, {
-        headers: {
-          "x-ms-blob-type": "BlockBlob",
-        },
-      });
-
-      console.log("Upload to Azure Blob Storage successful");
-    } catch (error) {
-      console.error("Error uploading to Azure Blob Storage:", error);
-    }
-  };
 
   useEffect(() => {
     if (!capturing && recordedChunks.length > 0) {
@@ -119,15 +92,13 @@ const VideoRecorder = () => {
   }, [thinkingTime, recordingTime, timerActive, capturing]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="w-80% mb-4 relative">
-        {" "}
-        {/* Updated styling */}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
+      <div className="w-[98%] h-full mb-4 relative">
         <Webcam
           audio={true}
           ref={webcamRef}
           muted={true}
-          className="rounded-lg shadow-lg border-10 border-gray-300"
+          className="w-full h-full rounded-lg shadow-lg border-10 border-gray-300 "
         />
         {showRecordingIcon && (
           <div className="absolute top-0 left-0 m-2 p-2 bg-red-600 text-white rounded-full">

@@ -1,7 +1,9 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
+import axios from "axios";
+import mongoose from "mongoose";
 
-const VideoRecorder = () => {
+const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
@@ -10,6 +12,21 @@ const VideoRecorder = () => {
   const [recordingTime, setRecordingTime] = useState(150); // 2 mins 30 seconds for recording
   const [timerActive, setTimerActive] = useState(true);
   const [showRecordingIcon, setShowRecordingIcon] = useState(false);
+
+  // Effect to notify parent component of timerActive changes
+  useEffect(() => {
+    onTimerActiveChange(timerActive);
+  }, [timerActive, onTimerActiveChange]);
+
+  useEffect(() => {
+    // Reset or perform actions when questionId changes
+    setCapturing(false);
+    setRecordedChunks([]);
+    setThinkingTime(30); // Reset thinking time if needed
+    setRecordingTime(150); // Reset recording time if needed
+    setTimerActive(true);
+    setShowRecordingIcon(false);
+  }, [questionId]);
 
   const handleDataAvailable = useCallback(
     ({ data }) => {
@@ -43,6 +60,29 @@ const VideoRecorder = () => {
     );
     mediaRecorderRef.current.start();
   }, [handleDataAvailable]);
+
+  const uploadToAzure = async (blob) => {
+    try {
+      // Fetch the SAS URL from your server
+      const response = await axios.get(
+        `http://localhost:3004/api/azure/sas/${userId}/${questionId}`
+      );
+      const { sasUrl } = response.data;
+
+      console.log("SAS URL:", sasUrl);
+
+      // Upload the blob to Azure Blob Storage using the SAS URL
+      await axios.put(sasUrl, blob, {
+        headers: {
+          "x-ms-blob-type": "BlockBlob",
+        },
+      });
+
+      console.log("Upload to Azure Blob Storage successful");
+    } catch (error) {
+      console.error("Error uploading to Azure Blob Storage:", error);
+    }
+  };
 
   useEffect(() => {
     if (!capturing && recordedChunks.length > 0) {

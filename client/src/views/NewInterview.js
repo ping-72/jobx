@@ -17,10 +17,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
+import { set } from "mongoose";
 
 const InterviewPage = () => {
   var { authToken, setToken } = useAuth();
   const [questions, setQuestions] = useState({});
+  const [questionIds, setQuestionIds] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const navigate = useNavigate();
@@ -30,6 +32,11 @@ const InterviewPage = () => {
     onOpen: onOpenSubmitModal,
     onClose: onCloseSubmitModal,
   } = useDisclosure();
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  const handleTimerActiveChange = (newTimerActiveValue) => {
+    setIsTimerActive(newTimerActiveValue);
+  };
 
   useEffect(() => {
     console.log("inside useeffect interview");
@@ -42,6 +49,10 @@ const InterviewPage = () => {
       fetchQuestions(storedAuthToken)
         .then((response) => {
           const questionsResponse = response.data.Questions;
+          // store the ids in questionIds
+          questionsResponse.map((question) => {
+            setQuestionIds((questionIds) => [...questionIds, question._id]);
+          });
 
           setQuestions(questionsResponse);
           setUserAnswers(Array(questionsResponse.length).fill(""));
@@ -149,33 +160,40 @@ const InterviewPage = () => {
           currentQuestionIndex={currentQuestionIndex}
         />
 
-        <VideoRecorder />
+        <VideoRecorder
+          questionId={questionIds[currentQuestionIndex]}
+          onTimerActiveChange={handleTimerActiveChange}
+        />
 
-        <Flex className="gap-4 p-0 py-1 mt-3 w-full justify-end">
-          <div>
-            <Tooltip
-              showArrow={true}
-              content={isLastQuestion ? "Submit Interview" : "Next Question"}
-              placement="bottom"
-            >
-              <Button
-                size="sm"
-                className=" py-6 lg:p-8 text-md w-0 lg:w-auto lg:text-lg font-medium border-blue-600 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-1"
-                onPress={
-                  isLastQuestion ? onOpenSubmitModal : handleNextQuestion
-                }
+        {!isTimerActive ? (
+          <Flex className="gap-4 p-0 py-1 mt-3 w-full justify-end">
+            <div>
+              <Tooltip
+                showArrow={true}
+                content={isLastQuestion ? "Submit Interview" : "Next Question"}
+                placement="bottom"
               >
-                {isLastQuestion ? (
-                  <>
-                    <FontAwesomeIcon icon={faCheck} size="lg" />
-                  </>
-                ) : (
-                  <FontAwesomeIcon icon={faArrowRight} size="lg" />
-                )}
-              </Button>
-            </Tooltip>
-          </div>
-        </Flex>
+                <Button
+                  size="sm"
+                  className=" py-6 lg:p-8 text-md w-0 lg:w-auto lg:text-lg font-medium border-blue-600 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-1"
+                  onPress={
+                    isLastQuestion ? onOpenSubmitModal : handleNextQuestion
+                  }
+                >
+                  {isLastQuestion ? (
+                    <>
+                      <FontAwesomeIcon icon={faCheck} size="lg" />
+                    </>
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                  )}
+                </Button>
+              </Tooltip>
+            </div>
+          </Flex>
+        ) : (
+          <></>
+        )}
         <SubmitIntervieModal
           isSubmitModalOpen={isSubmitModalOpen}
           onOpenSubmitModal={onOpenSubmitModal}

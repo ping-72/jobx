@@ -17,10 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
-import { set } from "mongoose";
 
 const InterviewPage = () => {
-  var { authToken, setToken } = useAuth();
+  var { authToken, setToken, userInfo, fetchUserInfo } = useAuth();
   const [questions, setQuestions] = useState({});
   const [questionIds, setQuestionIds] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -44,6 +43,8 @@ const InterviewPage = () => {
     const storedAuthToken = localStorage.getItem("authToken");
     if (storedAuthToken) {
       setToken(storedAuthToken);
+      // Fetch user info from the backend
+      fetchUserInfo(storedAuthToken);
 
       // Fetch questions from the backend when the component mounts
       fetchQuestions(storedAuthToken)
@@ -163,6 +164,7 @@ const InterviewPage = () => {
         <VideoRecorder
           questionId={questionIds[currentQuestionIndex]}
           onTimerActiveChange={handleTimerActiveChange}
+          userId={userInfo._id}
         />
 
         {!isTimerActive ? (

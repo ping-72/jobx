@@ -103,7 +103,7 @@ const getUser = async (req, res) => {
       username: user.username,
       email: user.email,
       role: user.role,
-      _id: user._id,
+      _id: userId,
     });
   } catch (error) {
     console.error("Error fetching user info:", error);

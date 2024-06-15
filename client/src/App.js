@@ -14,6 +14,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import Jobs from "./views/Jobs";
 import VideoRecorder from "./components/VideoRecorder";
 import NewInterview from "./views/NewInterview";
+import NewLandingPage from "./views/NewLanding";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/interview" element={<InterviewPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/new-interview" element={<NewInterview />} />
+            <Route path="/new-landing" element={<NewLandingPage />} />
           </Routes>
         </BrowserRouter>
       </NextUIProvider>

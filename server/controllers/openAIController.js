@@ -128,6 +128,7 @@ const evaluateTranscription = async (req, res) => {
     const usage = response.usage;
     const inputTokens = usage.prompt_tokens;
     const outputTokens = usage.completion_tokens;
+    const total_tokens = inputTokens + outputTokens;
     const { priceInputTokens, priceOutputTokens, totalPrice } = calculatePrice(
       model,
       inputTokens,

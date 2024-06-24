@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Demo from './components/auth/ReactLogin';
 import Home from "./views/Home";
 import { AuthProvider } from "./context/AuthContext";
-import LandingPage from "./views/Landing";
+// import LandingPage from "./views/Landing";
 import SignupPage from "./views/Signup";
 import AdminPage from "./views/Admin";
 import Login from "./views/Login";
@@ -15,6 +15,8 @@ import Jobs from "./views/Jobs";
 import VideoRecorder from "./components/VideoRecorder";
 import NewInterview from "./views/NewInterview";
 import NewLandingPage from "./views/NewLanding";
+import LandingPage from "./components/Test";
+// import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
   return (

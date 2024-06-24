@@ -17,12 +17,20 @@ const authRoutes = require("./routes/auth"); // Import your authentication route
 const interviewRoutes = require("./routes/interview");
 const jobRoutes = require("./routes/job");
 const questionRoutes = require("./routes/question");
+const azureRoutes = require("./routes/azure");
+const openAIRoutes = require("./routes/openAI");
 
 // Use your authentication routes
 app.use("/api/auth", authRoutes);
 
 // Use interview routes
 app.use("/api/interview", interviewRoutes);
+
+// Use azure routes
+app.use("/api/azure", azureRoutes);
+
+// Use open AI routes
+app.use("/api/openai", openAIRoutes);
 
 // Use job routes
 app.use("/api", jobRoutes);

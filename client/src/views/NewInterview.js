@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   fetchQuestions,
   submitInterview,
@@ -22,8 +22,7 @@ import { useLocation } from "react-router-dom";
 
 const InterviewPage = () => {
   var { authToken, setToken, userInfo, fetchUserInfo } = useAuth();
-  const [questions, setQuestions] = useState({});
-  const [questionIds, setQuestionIds] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const navigate = useNavigate();
@@ -55,12 +54,8 @@ const InterviewPage = () => {
       fetchQuestions(storedAuthToken)
         .then((response) => {
           const questionsResponse = response.data.Questions;
-          // store the ids in questionIds
-          questionsResponse.map((question) => {
-            setQuestionIds((questionIds) => [...questionIds, question._id]);
-          });
-
           setQuestions(questionsResponse);
+          console.log("Questions: ", questions);
           setUserAnswers(Array(questionsResponse.length).fill(""));
           console.log(response.data);
         })
@@ -69,13 +64,23 @@ const InterviewPage = () => {
           console.error("Error fetching questions:", error);
           navigate("/login");
         });
-      createInterview(authToken, userInfo._id, jobId, questionIds);
     } else {
       // Redirect to login if no authToken found
       navigate("/login");
       return;
     }
   }, []);
+
+  useEffect(() => {
+    if (authToken && userInfo._id && jobId && questions.length > 0) {
+      let questionIds = questions.map((question) => question._id);
+      createInterview(authToken, userInfo._id, jobId, questionIds).catch(
+        (error) => {
+          console.error("Error creating interview:", error);
+        }
+      );
+    }
+  }, [authToken, userInfo._id, jobId, questions.length]);
 
   const handleNextQuestion = () => {
     console.log("Next button clicked: ", currentQuestionIndex);
@@ -168,7 +173,12 @@ const InterviewPage = () => {
         />
 
         <VideoRecorder
-          questionId={questionIds[currentQuestionIndex]}
+          questionId={
+            questions[currentQuestionIndex] &&
+            questions[currentQuestionIndex]._id
+              ? questions[currentQuestionIndex]._id
+              : ""
+          }
           jobId={jobId}
           onTimerActiveChange={handleTimerActiveChange}
           userId={userInfo._id}

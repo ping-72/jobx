@@ -1,7 +1,6 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
-import mongoose from "mongoose";
 
 const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
   const webcamRef = useRef(null);

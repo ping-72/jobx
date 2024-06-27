@@ -106,7 +106,6 @@ const createInterview = async (req, res) => {
         })),
         attempt_number,
       });
-      console.log("existing Interview", existingInterview);
 
       await existingInterview.save();
 
@@ -130,7 +129,6 @@ const createInterview = async (req, res) => {
         },
       ],
     });
-    console.log("new Interview", interview);
 
     await interview.save();
 

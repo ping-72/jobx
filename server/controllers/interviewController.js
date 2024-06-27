@@ -74,6 +74,75 @@ const postInterview = async (req, res) => {
   }
 };
 
+const createInterview = async (req, res) => {
+  const { user_id, job_id, question_ids } = req.body;
+
+  try {
+    let attempt_number = 1;
+
+    // Check if there's already an interview for the user
+    const existingInterview = await Interview.findOne({ user_id });
+
+    if (existingInterview) {
+      attempt_number = existingInterview.interviews.length + 1;
+
+      // Check if there's already an interview for the same job
+      const existingJobInterview = existingInterview.interviews.find(
+        (interview) => interview.job_id.equals(job_id)
+      );
+      // If there's already an interview for the same job, return an error
+      if (existingJobInterview) {
+        return res
+          .status(400)
+          .json({ message: "Interview already exists for this user and job" });
+      }
+
+      // Add a new interview data under the interviews field
+      existingInterview.interviews.push({
+        job_id,
+        data: question_ids.map((question_id) => ({
+          question: question_id,
+          answer: "", // Initially empty, to be filled later
+        })),
+        attempt_number,
+      });
+      console.log("existing Interview", existingInterview);
+
+      await existingInterview.save();
+
+      return res.status(201).json({
+        message: "Interview created successfully",
+        interview: existingInterview,
+      });
+    }
+
+    // If no existing interview, create a new interview document
+    const interview = new Interview({
+      user_id,
+      interviews: [
+        {
+          job_id,
+          data: question_ids.map((question_id) => ({
+            question: question_id,
+            answer: "", // Initially empty, to be filled later
+          })),
+          attempt_number,
+        },
+      ],
+    });
+    console.log("new Interview", interview);
+
+    await interview.save();
+
+    res
+      .status(201)
+      .json({ message: "Interview created successfully", interview });
+  } catch (error) {
+    console.error("Error creating interview:", error);
+    res.status(500).json({ message: "Error creating interview", error });
+  }
+};
+
 const getCurrentCountOfInterviews = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -97,6 +166,7 @@ const InterviewController = {
   getQuestions,
   postInterview,
   getCurrentCountOfInterviews,
+  createInterview,
 };
 
 module.exports = InterviewController;

@@ -23,4 +23,6 @@ router.post("/responses", authMiddleware, InterviewController.postInterview);
 //     router.get('/evaluate', authMiddleware, InterviewController.evaluateInterview);
 // }
 
+router.post("/create-interview", InterviewController.createInterview);
+
 module.exports = router;

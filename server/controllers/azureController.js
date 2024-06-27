@@ -168,7 +168,7 @@ const processVideo = async (userId, jobId, questionId) => {
     // Step 4: Upload the transcription as a blob
     await uploadBlob(transcriptSasUrl, transcription);
 
-    // Step 5: Update the interview data with the transcription
+    // Step 5: Update the interview mongo DB data with the transcription
     await interviewService.updateAnswer(
       userId,
       jobId,

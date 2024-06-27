@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+Schema.Types.String.checkRequired((v) => v != null);
+
 const interviewSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
@@ -27,9 +29,11 @@ const interviewSchema = new Schema({
             required: true,
           },
           answer: { type: String, required: true },
+          _id: false,
         },
       ],
       attempt_number: { type: Number, required: true },
+      _id: false,
     },
   ],
 });

@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import axios from "axios";
 import mongoose from "mongoose";
 
-const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
+const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
@@ -65,7 +65,7 @@ const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
     try {
       // Fetch the SAS URL from your server
       const response = await axios.get(
-        `http://localhost:3004/api/azure/sas/${userId}/${questionId}`
+        `http://localhost:3004/api/azure/sas/${userId}/${jobId}/${questionId}`
       );
       const { sasUrl } = response.data;
 

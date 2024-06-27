@@ -3,6 +3,7 @@ import {
   fetchQuestions,
   submitInterview,
   evaluateInterview,
+  createInterview,
 } from "../api/interviewApi";
 import QuestionDisplay from "../components/interview/QuestionDisplay";
 import QuestionCategoryModal from "../components/interview/QuestionTypeModal";
@@ -17,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
+import { useLocation } from "react-router-dom";
 
 const InterviewPage = () => {
   var { authToken, setToken, userInfo, fetchUserInfo } = useAuth();
@@ -32,6 +34,8 @@ const InterviewPage = () => {
     onClose: onCloseSubmitModal,
   } = useDisclosure();
   const [isTimerActive, setIsTimerActive] = useState(true);
+  const location = useLocation();
+  const { jobId } = location.state || {};
 
   const handleTimerActiveChange = (newTimerActiveValue) => {
     setIsTimerActive(newTimerActiveValue);
@@ -39,6 +43,7 @@ const InterviewPage = () => {
 
   useEffect(() => {
     console.log("inside useeffect interview");
+    console.log("jobId: ", jobId);
     // If there is no authToken in the context, retrieve it from localStorage
     const storedAuthToken = localStorage.getItem("authToken");
     if (storedAuthToken) {
@@ -64,6 +69,7 @@ const InterviewPage = () => {
           console.error("Error fetching questions:", error);
           navigate("/login");
         });
+      createInterview(authToken, userInfo._id, jobId, questionIds);
     } else {
       // Redirect to login if no authToken found
       navigate("/login");
@@ -163,6 +169,7 @@ const InterviewPage = () => {
 
         <VideoRecorder
           questionId={questionIds[currentQuestionIndex]}
+          jobId={jobId}
           onTimerActiveChange={handleTimerActiveChange}
           userId={userInfo._id}
         />

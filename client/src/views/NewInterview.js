@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   fetchQuestions,
   submitInterview,
@@ -25,6 +25,8 @@ const InterviewPage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
+  const hasFetchedQuestions = useRef(false);
+  const hasCreatedInterview = useRef(false);
   const navigate = useNavigate();
   const [isQuestionPrevMoved, setQuestionPrevMoved] = useState(false);
   const {
@@ -40,6 +42,20 @@ const InterviewPage = () => {
     setIsTimerActive(newTimerActiveValue);
   };
 
+  const fetchQuestionsData = (token) => {
+    fetchQuestions(token)
+      .then((response) => {
+        const questionsResponse = response.data.Questions;
+        setQuestions(questionsResponse);
+        setUserAnswers(Array(questionsResponse.length).fill(""));
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching questions:", error);
+        navigate("/login");
+      });
+  };
+
   useEffect(() => {
     console.log("inside useeffect interview");
     console.log("jobId: ", jobId);
@@ -51,31 +67,34 @@ const InterviewPage = () => {
       fetchUserInfo(storedAuthToken);
 
       // Fetch questions from the backend when the component mounts
-      fetchQuestions(storedAuthToken)
-        .then((response) => {
-          const questionsResponse = response.data.Questions;
-          setQuestions(questionsResponse);
-          let questionIds = questions.map((question) => question._id);
-          createInterview(authToken, userInfo._id, jobId, questionIds).catch(
-            (error) => {
-              console.error("Error creating interview:", error);
-            }
-          );
-          // console.log("Questions: ", questions);
-          setUserAnswers(Array(questionsResponse.length).fill(""));
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Handle errors, such as redirecting on authorization failure
-          console.error("Error fetching questions:", error);
-          navigate("/login");
-        });
+      if (!hasFetchedQuestions.current) {
+        hasFetchedQuestions.current = true;
+        fetchQuestionsData(storedAuthToken);
+      }
     } else {
       // Redirect to login if no authToken found
       navigate("/login");
       return;
     }
   }, []);
+
+  useEffect(() => {
+    if (
+      authToken &&
+      userInfo._id &&
+      jobId &&
+      questions.length > 0 &&
+      !hasCreatedInterview.current
+    ) {
+      hasCreatedInterview.current = true;
+      let questionIds = questions.map((question) => question._id);
+      createInterview(authToken, userInfo._id, jobId, questionIds).catch(
+        (error) => {
+          console.error("Error creating interview:", error);
+        }
+      );
+    }
+  }, [authToken, userInfo._id, jobId, questions.length]);
 
   const handleNextQuestion = () => {
     console.log("Next button clicked: ", currentQuestionIndex);

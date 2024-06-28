@@ -32,6 +32,6 @@ const prepareInterviewText = async (questionId, answer) => {
   return interviewText;
 };
 
-const interviewService = { updateAnswer, prepareInterviewText };
+// const InterviewService = { updateAnswer, prepareInterviewText };
 
-module.exports = { interviewService };
+module.exports = { updateAnswer, prepareInterviewText };

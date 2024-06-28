@@ -1,6 +1,8 @@
 const Interview = require("../models/Interview"); // Import the Interview model
 const MAX_ATTEMPTS = process.env.MAX_ATTEMPTS || 5; // Default to 5 if not specified in .env
 const Question = require("../models/Question");
+// const InterviewService = require("../services/interviewService");
+const { updateAnswer } = require("../services/interviewService");
 
 // Only for local mongo DB connection for testing
 // const Questions = [
@@ -71,6 +73,19 @@ const postInterview = async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to store interview data. Please try again." });
+  }
+};
+
+const updateAnswerHandler = async (req, res) => {
+  const { user_id, job_id, question_id, answer } = req.body;
+  try {
+    await updateAnswer(user_id, job_id, question_id, answer);
+    res.status(200).json({ message: "Answer updated successfully." });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Failed to update answer. Please try again." });
   }
 };
 
@@ -165,6 +180,7 @@ const InterviewController = {
   postInterview,
   getCurrentCountOfInterviews,
   createInterview,
+  updateAnswerHandler,
 };
 
 module.exports = InterviewController;

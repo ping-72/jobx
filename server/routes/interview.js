@@ -23,6 +23,16 @@ router.post("/responses", authMiddleware, InterviewController.postInterview);
 //     router.get('/evaluate', authMiddleware, InterviewController.evaluateInterview);
 // }
 
-router.post("/create-interview", InterviewController.createInterview);
+router.post(
+  "/create-interview",
+  authMiddleware,
+  InterviewController.createInterview
+);
+
+router.post(
+  "/update-answer",
+  authMiddleware,
+  InterviewController.updateAnswerHandler
+);
 
 module.exports = router;

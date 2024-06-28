@@ -55,7 +55,13 @@ const InterviewPage = () => {
         .then((response) => {
           const questionsResponse = response.data.Questions;
           setQuestions(questionsResponse);
-          console.log("Questions: ", questions);
+          let questionIds = questions.map((question) => question._id);
+          createInterview(authToken, userInfo._id, jobId, questionIds).catch(
+            (error) => {
+              console.error("Error creating interview:", error);
+            }
+          );
+          // console.log("Questions: ", questions);
           setUserAnswers(Array(questionsResponse.length).fill(""));
           console.log(response.data);
         })
@@ -70,17 +76,6 @@ const InterviewPage = () => {
       return;
     }
   }, []);
-
-  useEffect(() => {
-    if (authToken && userInfo._id && jobId && questions.length > 0) {
-      let questionIds = questions.map((question) => question._id);
-      createInterview(authToken, userInfo._id, jobId, questionIds).catch(
-        (error) => {
-          console.error("Error creating interview:", error);
-        }
-      );
-    }
-  }, [authToken, userInfo._id, jobId, questions.length]);
 
   const handleNextQuestion = () => {
     console.log("Next button clicked: ", currentQuestionIndex);

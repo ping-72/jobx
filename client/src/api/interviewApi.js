@@ -12,26 +12,6 @@ export const fetchQuestions = async (authToken) => {
   });
 };
 
-export const submitInterview = async (authToken, interviewData) => {
-  return axios.post(
-    `${API_URL}/responses`,
-    { interview: interviewData },
-    {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    }
-  );
-};
-
-export const evaluateInterview = async (authToken) => {
-  return axios.get(`${API_URL}/evaluate`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  });
-};
-
 export const createInterview = async (
   authToken,
   userId,

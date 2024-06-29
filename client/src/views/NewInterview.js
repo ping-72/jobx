@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  fetchQuestions,
-  submitInterview,
-  evaluateInterview,
-  createInterview,
-} from "../api/interviewApi";
+import { fetchQuestions, createInterview } from "../api/interviewApi";
 import QuestionDisplay from "../components/interview/QuestionDisplay";
 import QuestionCategoryModal from "../components/interview/QuestionTypeModal";
 import SubmitIntervieModal from "../components/interview/SubmitInterviewModal";
@@ -19,6 +14,8 @@ import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
 import { useLocation } from "react-router-dom";
+import { transcribeInterview } from "../api/azureApi";
+import { evaluateInterview } from "../api/openAIApi";
 
 const InterviewPage = () => {
   var { authToken, setToken, userInfo, fetchUserInfo } = useAuth();
@@ -106,39 +103,16 @@ const InterviewPage = () => {
 
   const handleSubmit = () => {
     console.log("Submit button clicked");
-
-    // Construct the interview data
-    const interviewData = questions.map((questionObj, index) => ({
-      question: questionObj.question,
-      answer: userAnswers[index],
-    }));
-
-    // Send a POST request to the backend to store the interview data
-    submitInterview(authToken, interviewData)
+    transcribeInterview(authToken, userInfo._id, jobId)
       .then((response) => {
-        console.log("Interview data submitted successfully:", response);
-        navigate("/thank-you");
+        evaluateInterview(authToken).then((response) => {
+          console.log("Interview data submitted successfully:", response);
+        });
       })
       .catch((error) => {
-        console.error("Error submitting interview data:", error);
-        // Handle the error, such as displaying an error message
+        console.error("Error submitting interview:", error);
       });
-
-    // Call evaluate API with chatGPT
-    evaluateInterview(authToken)
-      .then((response) => {
-        console.log("Evaluation from Chat-GPT: ", response);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 404) {
-          console.log("Evaluation feature is currently disabled.");
-          // Optionally redirect or display a message to the user
-          // TODO: Display a notification bar
-        } else {
-          console.error("Error during evaluation:", error);
-          // Handle other types of errors
-        }
-      });
+    navigate("/thank-you");
   };
 
   const questionsCount = questions.length;

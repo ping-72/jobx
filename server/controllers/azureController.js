@@ -184,8 +184,27 @@ const processVideo = async (userId, jobId, questionId) => {
   }
 };
 
-const handleTranscription = async (req, res) => {
-  const { userId, jobId, questionId } = req.params;
+const processVideoForAllQuestions = async (userId, jobId) => {
+  const questionIds = interviewService.getQuestionIds(userId, jobId);
+  console.log("questionIds", questionIds);
+  for (const questionId of questionIds) {
+    console.log("Processing question:", questionId);
+    // await processVideo(userId, jobId, questionId);
+  }
+};
+
+const handleTranscriptionForAllQuestions = async (req, res) => {
+  const { userId, jobId } = req.body;
+  try {
+    await processVideoForAllQuestions(userId, jobId);
+    res.status(200).send("Transcription process completed successfully.");
+  } catch (error) {
+    res.status(500).send("Error during transcription process.");
+  }
+};
+
+const handleTranscriptionForEachQuestion = async (req, res) => {
+  const { userId, jobId, questionId } = req.body;
   try {
     await processVideo(userId, jobId, questionId);
     res.status(200).send("Transcription process completed successfully.");
@@ -220,7 +239,8 @@ const downloadAudio = (req, res) => {
 
 const azureController = {
   generateSasToken,
-  handleTranscription,
+  handleTranscriptionForEachQuestion,
+  handleTranscriptionForAllQuestions,
   downloadAudio,
 };
 

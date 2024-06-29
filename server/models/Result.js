@@ -18,7 +18,7 @@ const resultsSchema = new Schema({
     required: true,
   },
   score: {
-    communication: { type: Number, required: true },
+    communication_skills: { type: Number, required: true },
     subject_expertise: { type: Number, required: true },
     relevancy: { type: Number, required: true },
     // Additional categories can be added here

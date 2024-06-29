@@ -86,6 +86,7 @@ const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
   useEffect(() => {
     if (!capturing && recordedChunks.length > 0) {
       const blob = new Blob(recordedChunks, { type: "video/webm" });
+      uploadToAzure(blob);
       setRecordedChunks([]);
     }
   }, [recordedChunks, capturing]);

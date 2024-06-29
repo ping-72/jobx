@@ -11,3 +11,5 @@ const saveResult = async (userId, jobId, questionId, scores, feedback) => {
 
   await newResult.save();
 };
+
+module.exports = { saveResult };

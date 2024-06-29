@@ -1,7 +1,7 @@
 const OpenAI = require("openai");
 const { encoding_for_model } = require("tiktoken");
 const { getInterviewText } = require("../services/interviewService");
-const { saveResult } = require("../services/resultService");
+const { saveResult, checkResult } = require("../services/resultService");
 
 const openai = new OpenAI();
 
@@ -146,18 +146,15 @@ const evaluateAnswer = async (interviewText) => {
   if (!interviewText) {
     throw new Error("Interview text is required for evaluation.");
   }
-  console.log("interviewText in evaluateAnswer", interviewText);
-  // console.log("questionId in evaluateAnswer", questionId);
+
   await moderateInterviewText(interviewText);
 
   const model = "gpt-3.5-turbo-0125";
   const maxTokens = 150;
   const messages = prepareEvaluationMessages(interviewText);
 
-  console.log("messages", messages);
   const response = await callOpenAIAPI(messages, model, maxTokens);
   const processedResponse = processAPIResponse(response, model);
-  console.log("processedResponse", processedResponse.result);
 
   return processedResponse.result;
 };
@@ -177,6 +174,13 @@ const evaluateTranscriptionForAllQuestions = async (req, res) => {
         results.push({ questionId, result: null });
         continue;
       }
+      const resultFromDB = await checkResult(userId, jobId, questionId);
+      if (resultFromDB) {
+        console.log("Evaluation already done for the question");
+        results.push({ questionId, result: resultFromDB.result });
+        continue;
+      }
+
       const result = await evaluateAnswer({
         question,
         answer,

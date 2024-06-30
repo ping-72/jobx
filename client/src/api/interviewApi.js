@@ -28,3 +28,15 @@ export const createInterview = async (
     }
   );
 };
+
+export const submitInterview = async (authToken, userId, jobId) => {
+  return axios.post(
+    `${API_URL}/submit-interview`,
+    { userId, jobId },
+    {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
+};

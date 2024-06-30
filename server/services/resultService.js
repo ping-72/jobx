@@ -1,29 +1,26 @@
 const Result = require("../models/Result");
 
-const saveResult = async (userId, jobId, questionId, scores, feedback) => {
-  // Check if the result already exists
-  const result = await checkResult(userId, jobId, questionId);
-  if (result) {
-    return;
-  }
-  const newResult = new Result({
-    user_id: userId,
-    job_id: jobId,
-    question_id: questionId,
-    score: scores,
-    feedback: feedback,
-  });
-
-  await newResult.save();
+const saveResult = async (resultData) => {
+  const newResult = new Result(resultData);
+  return await newResult.save();
 };
 
-const checkResult = async (userId, jobId, questionId) => {
-  const result = await Result.findOne({
-    user_id: userId,
-    job_id: jobId,
-    question_id: questionId,
-  });
-  return result;
+const findResultByInterviewId = async (interviewId) => {
+  return await Result.findOne({ interview_id: interviewId });
 };
 
-module.exports = { saveResult };
+const updateResult = async (interviewId, updateData) => {
+  return await Result.findOneAndUpdate(
+    { interview_id: interviewId },
+    updateData,
+    { new: true }
+  );
+};
+
+const ResultService = {
+  saveResult,
+  findResultByInterviewId,
+  updateResult,
+};
+
+module.exports = ResultService;

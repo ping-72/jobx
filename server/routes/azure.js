@@ -7,7 +7,7 @@ router.get("/sas/:userId/:jobId/:questionId", AzureController.generateSasToken);
 
 router.post(
   "/transcribeForOneQuestion",
-  AzureController.handleTranscriptionForEachQuestion
+  AzureController.handleTranscriptionForOneQuestion
 );
 
 router.post("/transcribe", AzureController.handleTranscriptionForAllQuestions);

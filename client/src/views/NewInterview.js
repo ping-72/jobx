@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { fetchQuestions, createInterview } from "../api/interviewApi";
+import {
+  fetchQuestions,
+  createInterview,
+  submitInterview,
+} from "../api/interviewApi";
 import QuestionDisplay from "../components/interview/QuestionDisplay";
 import QuestionCategoryModal from "../components/interview/QuestionTypeModal";
 import SubmitIntervieModal from "../components/interview/SubmitInterviewModal";
@@ -14,14 +18,12 @@ import { faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../components/interview/interview.css";
 import VideoRecorder from "../components/VideoRecorder";
 import { useLocation } from "react-router-dom";
-import { transcribeInterview } from "../api/azureApi";
-import { evaluateInterview } from "../api/openAIApi";
 
 const InterviewPage = () => {
   var { authToken, setToken, userInfo, fetchUserInfo } = useAuth();
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  // const [userAnswers, setUserAnswers] = useState([]);
   const hasFetchedQuestions = useRef(false);
   const hasCreatedInterview = useRef(false);
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const InterviewPage = () => {
       .then((response) => {
         const questionsResponse = response.data.Questions;
         setQuestions(questionsResponse);
-        setUserAnswers(Array(questionsResponse.length).fill(""));
+        // setUserAnswers(Array(questionsResponse.length).fill(""));
         console.log(response.data);
       })
       .catch((error) => {
@@ -103,16 +105,15 @@ const InterviewPage = () => {
 
   const handleSubmit = () => {
     console.log("Submit button clicked");
-    transcribeInterview(authToken, userInfo._id, jobId)
+    submitInterview(authToken, userInfo._id, jobId)
       .then((response) => {
-        evaluateInterview(authToken).then((response) => {
-          console.log("Interview data submitted successfully:", response);
-        });
+        console.log("Interview submitted successfully:", response);
+        navigate("/thank-you");
       })
       .catch((error) => {
         console.error("Error submitting interview:", error);
+        // Handle error (e.g., show error message to user)
       });
-    navigate("/thank-you");
   };
 
   const questionsCount = questions.length;

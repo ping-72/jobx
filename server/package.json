@@ -1,11 +1,15 @@
 {
-  "name": "jobx",
+  "name": "server",
   "version": "1.0.0",
   "description": "A platform for job-seekers to get interviewed and evaluated",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix ../client",
+    "build-client": "npm run build --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build-client"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +31,9 @@
     "punycode": "^2.3.1",
     "react-router-dom": "^6.17.0",
     "tiktoken": "^1.0.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "concurrently": "^7.0.0"
   }
 }

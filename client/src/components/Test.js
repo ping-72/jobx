@@ -139,7 +139,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-[var(--color-primary)] text-[var(--color-text)] px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition"
+          className="bg-[var(--color-primary)] text-[var(--color-surface)] px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition"
         >
           Get Started
         </motion.button>

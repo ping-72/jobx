@@ -122,9 +122,24 @@ const evaluateAnswer = async (interviewText) => {
       "MISSING_INTERVIEW_TEXT"
     );
   }
-
-  await moderateInterviewText(interviewText);
-
+  try {
+    await moderateInterviewText(interviewText);
+  } catch (error) {
+    console.log("Error moderating interview text:", error.message);
+    console.log("Interview contains inappropriate content");
+    console.log(
+      "Scoring 0 for all categories and providing feedback to the candidate"
+    );
+    return {
+      scores: {
+        communication_skills: 0,
+        subject_expertise: 0,
+        relevancy: 0,
+      },
+      feedback:
+        "Your answer contains inappropriate content. Please provide a professional response.",
+    };
+  }
   const model = "gpt-3.5-turbo-0125";
   const maxTokens = 150;
   const messages = prepareEvaluationMessages(interviewText);

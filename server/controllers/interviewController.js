@@ -48,6 +48,10 @@ const triggerAsyncProcessing = async (userId, jobId) => {
       `Starting async processing for user ${userId} and job ${jobId}`
     );
 
+    // sleep for 30 seconds
+    console.log("Sleeping for 30 seconds...");
+    await new Promise((resolve) => setTimeout(resolve, 30000));
+
     console.log("Processing videos...");
     await AzureService.processVideoForAllQuestions(userId, jobId);
 

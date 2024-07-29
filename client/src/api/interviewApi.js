@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3004/api/interview";
-// const BACKEND_URL = 'https://jobx-32a058281844.herokuapp.com';
-// const API_URL = `${BACKEND_URL}/api/interview`;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = BACKEND_URL + "/api/interview";
 
 export const fetchQuestions = async (authToken) => {
   return axios.get(`${API_URL}/questions`, {

@@ -9,6 +9,7 @@ import StartInterviewModal from "../components/home/StartInterviewModal";
 import { fetchInterviewCounts } from "../api/homeApi";
 
 const MAX_ATTEMPTS = process.env.REACT_APP_MAX_ATTEMPTS || 5;
+console.log("Max attempts:", MAX_ATTEMPTS);
 
 const Home = () => {
   const navigate = useNavigate();

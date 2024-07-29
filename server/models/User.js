@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "candidate",
-    trim: true,
+    enum: ["candidate", "recruiter"],
+    required: true,
   },
   email: {
     type: String,
@@ -29,6 +29,13 @@ const userSchema = new mongoose.Schema({
   salt: {
     type: String,
     required: true,
+  },
+  companyName: {
+    type: String,
+    required: function () {
+      return this.role === "recruiter";
+    },
+    trim: true,
   },
   interviews: [{ type: Schema.Types.ObjectId, ref: "Interview" }],
   created_at: { type: Date, default: Date.now },

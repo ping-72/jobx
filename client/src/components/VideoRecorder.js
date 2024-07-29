@@ -4,6 +4,9 @@ import axios from "axios";
 
 const CHUNK_SIZE = 1024 * 1024; // 1MB chunks
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = BACKEND_URL + "/api/";
+
 const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
@@ -73,7 +76,7 @@ const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
     formData.append("totalChunks", totalChunks);
 
     try {
-      await axios.post("http://localhost:3004/api/upload/chunk", formData, {
+      await axios.post(API_URL + "/upload/chunk", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round(
@@ -103,7 +106,7 @@ const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
     }
 
     try {
-      await axios.post("http://localhost:3004/api/upload/finalize", {
+      await axios.post(API_URL + "/upload/finalize", {
         userId,
         jobId,
         questionId,
@@ -120,7 +123,7 @@ const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
     try {
       // Fetch the SAS URL from your server
       const response = await axios.get(
-        `http://localhost:3004/api/azure/sas/${userId}/${jobId}/${questionId}`
+        `${API_URL}/azure/sas/${userId}/${jobId}/${questionId}`
       );
       const { sasUrl } = response.data;
 

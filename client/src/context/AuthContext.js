@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
-const API_URL = 'http://localhost:3004/api/auth';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = BACKEND_URL + "/api/auth";
 // const API_URL = 'https://jobx-32a058281844.herokuapp.com/api/auth';
 const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const setToken = async (token) => {
     setAuthToken(token);
-    localStorage.setItem('authToken', token);
+    localStorage.setItem("authToken", token);
   };
 
   const fetchUserInfo = async (token) => {
@@ -26,12 +27,14 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(userData);
       }
     } catch (error) {
-      console.error('Error fetching user information:', error);
+      console.error("Error fetching user information:", error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, setToken, userInfo, fetchUserInfo }}>
+    <AuthContext.Provider
+      value={{ authToken, setToken, userInfo, fetchUserInfo }}
+    >
       {children}
     </AuthContext.Provider>
   );

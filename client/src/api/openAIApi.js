@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3004/api/openai";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = BACKEND_URL + "/api/openai";
 
 export const evaluateInterview = async (authToken) => {
   return axios.get(`${API_URL}/evaluate`, {

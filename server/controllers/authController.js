@@ -9,7 +9,7 @@ require("dotenv").config();
 register = async (req, res) => {
   try {
     // Retrieve user data from the request body
-    const { username, password, email } = req.body;
+    const { username, password, email, role, companyName } = req.body;
     console.log("inside register");
     // Check if the username or password is missing
     if (!username || !password) {
@@ -34,6 +34,8 @@ register = async (req, res) => {
       username,
       password,
       email,
+      role,
+      companyName, // Only for employers
     });
 
     // Save the user document to the database

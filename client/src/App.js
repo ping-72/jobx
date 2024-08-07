@@ -15,6 +15,7 @@ import VideoRecorder from "./components/VideoRecorder";
 import NewInterview from "./views/NewInterview";
 import NewLandingPage from "./views/NewLanding";
 import LandingPage from "./components/Test";
+import LandingTest from "./components/LandingTest"
 // import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
       <NextUIProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingTest />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/admin" element={<AdminPage />} />

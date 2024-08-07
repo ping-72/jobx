@@ -42,7 +42,7 @@ code {
 
 .main:after {
   content: "";
-  background-image: url("images/grid.svg");
+  background-image: url("assets/grid.svg");
   z-index: 1;
   position: absolute;
   width: 100%;

@@ -7,6 +7,7 @@ services:
       - "3004:3004"
     environment:
       - MONGODB_URI=${MONGODB_URI}
+      - PORT=3004
       - JWT_TOKEN_SECRET_KEY=${JWT_TOKEN_SECRET_KEY}
       - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
       - AZURE_TENANT_ID=${AZURE_TENANT_ID}

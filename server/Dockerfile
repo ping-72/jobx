@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm rebuild bcrypt --build-from-source
-
 EXPOSE 3004
 
 CMD ["node", "index.js"]

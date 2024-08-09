@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Demo from './components/auth/ReactLogin';
@@ -8,7 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import SignupPage from "./views/Signup";
 import AdminPage from "./views/Admin";
 import Login from "./views/Login";
-import InterviewPage from "./views/Interview";
+// import InterviewPage from "./views/Interview";
 import ThankYouPage from "./views/ThankYouPage";
 import { NextUIProvider } from "@nextui-org/react";
 import Jobs from "./views/Jobs";
@@ -16,6 +15,7 @@ import VideoRecorder from "./components/VideoRecorder";
 import NewInterview from "./views/NewInterview";
 import NewLandingPage from "./views/NewLanding";
 import LandingPage from "./components/Test";
+import LandingTest from "./components/LandingTest"
 // import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
       <NextUIProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingTest />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/admin" element={<AdminPage />} />
@@ -32,7 +32,7 @@ function App() {
             <Route path="/test" element={<VideoRecorder />} />
             {/* <Route path="/login" element={<Demo />} /> */}
             <Route path="/home" element={<Home />} />
-            <Route path="/interview" element={<InterviewPage />} />
+            {/* <Route path="/interview" element={<InterviewPage />} /> */}
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/new-interview" element={<NewInterview />} />
             <Route path="/new-landing" element={<NewLandingPage />} />

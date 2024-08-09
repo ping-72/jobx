@@ -1,6 +1,6 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
 import { useContext, createContext, useState } from "react";
-import logo from "../../images/logo1.png";
+import logo from "../../assets/logo1.png";
 import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
 import { user } from "@nextui-org/react";
 

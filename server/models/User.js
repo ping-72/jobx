@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto"); // For generating the salt and hashing the password
 
+const { Schema } = mongoose;
+
 const userSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId, // Define _id as ObjectId type
   username: {
@@ -11,8 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "candidate",
-    trim: true,
+    enum: ["candidate", "recruiter"],
+    required: true,
   },
   email: {
     type: String,
@@ -28,6 +30,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  companyName: {
+    type: String,
+    required: function () {
+      return this.role === "recruiter";
+    },
+    trim: true,
+  },
+  interviews: [{ type: Schema.Types.ObjectId, ref: "Interview" }],
+  created_at: { type: Date, default: Date.now },
 });
 
 userSchema

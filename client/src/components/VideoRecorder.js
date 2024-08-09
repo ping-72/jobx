@@ -1,13 +1,18 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
-import mongoose from "mongoose";
 
-const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
+const CHUNK_SIZE = 1024 * 1024; // 1MB chunks
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = BACKEND_URL + "/api/";
+
+const VideoRecorder = ({ questionId, jobId, userId, onTimerActiveChange }) => {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [thinkingTime, setThinkingTime] = useState(30); // 30 seconds for thinking
   const [recordingTime, setRecordingTime] = useState(150); // 2 mins 30 seconds for recording
   const [timerActive, setTimerActive] = useState(true);
@@ -61,11 +66,64 @@ const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
     mediaRecorderRef.current.start();
   }, [handleDataAvailable]);
 
+  const uploadChunk = async (chunk, index, totalChunks) => {
+    const formData = new FormData();
+    formData.append("video", chunk, "video-chunk");
+    formData.append("userId", userId);
+    formData.append("jobId", jobId);
+    formData.append("questionId", questionId);
+    formData.append("chunkIndex", index);
+    formData.append("totalChunks", totalChunks);
+
+    try {
+      await axios.post(API_URL + "/upload/chunk", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(
+            (prevProgress) => prevProgress + percentCompleted / totalChunks
+          );
+        },
+      });
+      console.log(`Chunk ${index + 1}/${totalChunks} uploaded successfully`);
+    } catch (error) {
+      console.error("Error uploading chunk:", error);
+      throw error;
+    }
+  };
+
+  const uploadVideo = async (blob) => {
+    const totalChunks = Math.ceil(blob.size / CHUNK_SIZE);
+    setUploadProgress(0);
+
+    for (let i = 0; i < totalChunks; i++) {
+      const start = i * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, blob.size);
+      const chunk = blob.slice(start, end);
+      await uploadChunk(chunk, i, totalChunks);
+    }
+
+    try {
+      await axios.post(API_URL + "/upload/finalize", {
+        userId,
+        jobId,
+        questionId,
+        totalChunks,
+      });
+      console.log("Upload finalized");
+      setUploadProgress(100);
+    } catch (error) {
+      console.error("Error finalizing upload:", error);
+    }
+  };
+
   const uploadToAzure = async (blob) => {
     try {
       // Fetch the SAS URL from your server
       const response = await axios.get(
-        `http://localhost:3004/api/azure/sas/${userId}/${questionId}`
+        `${API_URL}/azure/sas/${userId}/${jobId}/${questionId}`
       );
       const { sasUrl } = response.data;
 
@@ -87,6 +145,8 @@ const VideoRecorder = ({ questionId, userId, onTimerActiveChange }) => {
   useEffect(() => {
     if (!capturing && recordedChunks.length > 0) {
       const blob = new Blob(recordedChunks, { type: "video/webm" });
+      // uploadToAzure(blob);
+      uploadVideo(blob);
       setRecordedChunks([]);
     }
   }, [recordedChunks, capturing]);

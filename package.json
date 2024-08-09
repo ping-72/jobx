@@ -1,31 +1,18 @@
 {
   "name": "jobx",
   "version": "1.0.0",
-  "description": "A platform for job-seekers to get interviewed and evaluated",
-  "main": "index.js",
+  "description": "Root package for JobX project",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run server",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-all": "npm run install-client && npm run install-server"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@azure/identity": "^4.2.0",
-    "@azure/storage-blob": "^12.23.0",
-    "axios": "^1.7.2",
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "fluent-ffmpeg": "^2.1.3",
-    "jsonwebtoken": "^9.0.2",
-    "microsoft-cognitiveservices-speech-sdk": "^1.38.0",
-    "mongoose": "^7.6.3",
-    "openai": "^4.51.0",
-    "punycode": "^2.3.1",
-    "react-router-dom": "^6.17.0",
-    "tiktoken": "^1.0.15"
+    "concurrently": "^7.0.0"
   }
 }

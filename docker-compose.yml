@@ -4,7 +4,7 @@ services:
   backend:
     build: ./server
     ports:
-      - "3004:3004"
+      - "3004:3004" # Backend exposed on 3004
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - PORT=3004
@@ -25,7 +25,7 @@ services:
   frontend:
     build: ./client
     ports:
-      - "80:80"
+      - "8080:80" # Frontend mapped to 8080 on Docker host
     networks:
       - app-network
 

@@ -3,6 +3,8 @@ version: "3.8"
 services:
   backend:
     build: ./server
+    expose:
+      - "3004"
     ports:
       - "3004:3004" # Backend exposed on 3004
     environment:
@@ -24,6 +26,8 @@ services:
 
   frontend:
     build: ./client
+    expose:
+      - "80"
     ports:
       - "8080:80" # Frontend mapped to 8080 on Docker host
     networks:

@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 generated_configs/*
+dev/
+venv/

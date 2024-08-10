@@ -36,3 +36,5 @@ Thumbs.db
 
 *.sh
 generated_configs/*
+dev/
+venv/

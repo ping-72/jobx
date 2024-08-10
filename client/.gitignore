@@ -22,6 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-generated_configs/*
+generated_configs/
 dev/
 venv/
+templates/env/

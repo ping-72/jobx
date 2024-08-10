@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./server
+    expose:
+      - "{{ backend_port }}"
+    ports:
+      - "{{ backend_port }}:{{ backend_port }}"
+    env_file:
+      - .env.server
+    networks:
+      - app-network
+
+  frontend:
+    build: ./client
+    expose:
+      - "{{ frontend_port }}"
+    ports:
+      - "{{ frontend_port }}:80"
+    env_file:
+      - .env.client
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

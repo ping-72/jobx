@@ -66,17 +66,14 @@ def generate_env_files(config, is_local):
         )
     server_env = replace_variables(server_env, config)
 
-    with open( ".env", 'w') as file:
-        file.write(base_env)
-
-    with open(".env.client", 'w') as file:
+    with open("client/.env.client", 'w') as file:
         file.write(f"{base_env}\n{client_env}")
 
-    with open( ".env.server", 'w') as file:
+    with open( "server/.env.server", 'w') as file:
         file.write(f"{base_env}\n{server_env}")
 
 def generate_docker_compose_file(config, is_local):
-    template = load_template("templates/docker-compose.template.yml")
+    template = load_template(f"{ENV_TEMPLATES_DIR}/docker-compose.template.yml")
     docker_compose_content = replace_variables(template, config)
 
     with open("docker-compose.yml", 'w') as file:
@@ -87,7 +84,7 @@ def generate_nginx_config(config, is_local):
         print("Skipping Nginx config generation for local environment.")
         return
 
-    template = load_template("nginx.template.conf")
+    template = load_template(f"{ENV_TEMPLATES_DIR}/nginx.template.conf")
     nginx_content = replace_variables(template, config)
 
     # nginx_config_path = os.path.join(GENERATED_DIR, environment, "nginx.conf")

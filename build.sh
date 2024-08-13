@@ -48,8 +48,8 @@ restart_services() {
 get_nginx_ports() {
     local env=$1
     local config_file="config/env.config.yaml"
-    local http_port=$(yq e ".environments.$env.nginx_http_port" $config_file)
-    local https_port=$(yq e ".environments.$env.nginx_https_port" $config_file)
+    local http_port=$(cat $config_file | yq ".environments.$env.nginx_http_port")
+    local https_port=$(cat $config_file | yq ".environments.$env.nginx_https_port")
     echo "$http_port $https_port"
 }
 

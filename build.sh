@@ -22,7 +22,7 @@ check_cert() {
 # Function to generate configurations
 generate_config() {
     local env=$1
-    python3 generate_env.py --env $env
+    python generate_env.py --env $env
 }
 
 # Function to start services
@@ -44,6 +44,15 @@ restart_services() {
     start_services $env
 }
 
+# Function to get nginx ports
+get_nginx_ports() {
+    local env=$1
+    local config_file="config/env.config.yaml"
+    local http_port=$(yq e ".environments.$env.nginx_http_port" $config_file)
+    local https_port=$(yq e ".environments.$env.nginx_https_port" $config_file)
+    echo "$http_port $https_port"
+}
+
 # Main script
 case $1 in
     build)
@@ -53,11 +62,15 @@ case $1 in
                 check_cert $e
                 generate_config $e
                 start_services $e
+                ports=($(get_nginx_ports $e))
+                echo "$e environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
             done
         else
             check_cert $env
             generate_config $env
             start_services $env
+            ports=($(get_nginx_ports $env))
+            echo "$env environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
         fi
         ;;
     stop)
@@ -77,11 +90,15 @@ case $1 in
                 check_cert $e
                 generate_config $e
                 restart_services $e
+                ports=($(get_nginx_ports $e))
+                echo "$e environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
             done
         else
             check_cert $env
             generate_config $env
             restart_services $env
+            ports=($(get_nginx_ports $env))
+            echo "$env environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
         fi
         ;;
     renew-certs)

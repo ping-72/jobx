@@ -4,8 +4,8 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - "{{ nginx_http_port }}:80"
+      - "{{ nginx_https_port }}:443"
     volumes:
       - ./nginx/{{ environment }}.conf:/etc/nginx/conf.d/default.conf:ro
       - ./certs/{{ environment }}:/etc/letsencrypt/live/{{ domain }}:ro

@@ -79,6 +79,9 @@ case $1 in
         fi
         ;;
     init-certs)
+        for e in dev qa prod; do
+            generate_config $e
+        done
         ./init-letsencrypt.sh
         ;;
     *)

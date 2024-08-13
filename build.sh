@@ -1,24 +1,5 @@
 #!/bin/bash
 
-# Function to check certificate validity
-check_cert() {
-    local env=$1
-    local domain
-    case $env in
-        dev) domain="dev.ruthi.in" ;;
-        qa) domain="qa.ruthi.in" ;;
-        prod) domain="ruthi.in" ;;
-        *) echo "Invalid environment"; exit 1 ;;
-    esac
-    
-    if ! openssl x509 -checkend 2592000 -noout -in certs/$env/fullchain.pem; then
-        echo "Certificate for $env will expire within 30 days. Renewing..."
-        ./renew_certs.sh
-    else
-        echo "Certificate for $env is valid."
-    fi
-}
-
 # Function to generate configurations
 generate_config() {
     local env=$1
@@ -59,14 +40,12 @@ case $1 in
         env=${2:-all}
         if [ "$env" = "all" ]; then
             for e in dev qa prod; do
-                check_cert $e
                 generate_config $e
                 start_services $e
                 ports=($(get_nginx_ports $e))
                 echo "$e environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
             done
         else
-            check_cert $env
             generate_config $env
             start_services $env
             ports=($(get_nginx_ports $env))
@@ -87,22 +66,20 @@ case $1 in
         env=${2:-all}
         if [ "$env" = "all" ]; then
             for e in dev qa prod; do
-                check_cert $e
                 generate_config $e
                 restart_services $e
                 ports=($(get_nginx_ports $e))
                 echo "$e environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
             done
         else
-            check_cert $env
             generate_config $env
             restart_services $env
             ports=($(get_nginx_ports $env))
             echo "$env environment is running on HTTP port ${ports[0]} and HTTPS port ${ports[1]}"
         fi
         ;;
-    renew-certs)
-        ./renew_certs.sh
+    init-certs)
+        ./init-letsencrypt.sh
         ;;
     *)
         echo "Usage: $0 {build|stop|restart|renew-certs} [environment]"

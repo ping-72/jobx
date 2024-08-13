@@ -1,25 +1,35 @@
 version: "3.8"
 
 services:
-  backend:
-    build: ./server
-    expose:
-      - "{{ backend_port }}"
+  nginx:
+    image: nginx:latest
     ports:
-      - "{{ backend_port }}:{{ backend_port }}"
-    env_file:
-      - server/.env.server
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/{{ environment }}.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs/{{ environment }}:/etc/letsencrypt/live/{{ domain }}:ro
+    depends_on:
+      - backend_{{ environment }}
+      - frontend_{{ environment }}
     networks:
       - app-network
 
-  frontend:
-    build: ./client
+  backend_{{ environment }}:
+    build: ../../server
     expose:
-      - "{{ frontend_port }}"
-    ports:
-      - "{{ frontend_port }}:80"
+      - "{{ backend_port }}"
     env_file:
-      - client/.env.client
+      - ../../server/.env.server.{{ environment }}
+    networks:
+      - app-network
+
+  frontend_{{ environment }}:
+    build: ../../client
+    expose:
+      - "80"
+    env_file:
+      - ../../client/.env.client.{{ environment }}
     networks:
       - app-network
 

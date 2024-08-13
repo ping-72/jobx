@@ -27,8 +27,8 @@ Thumbs.db
 # Environment variables
 .env*
 
+certs/
 
-*.sh
 generated_configs/
 dev/
 venv/

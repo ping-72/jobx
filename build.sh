@@ -22,7 +22,7 @@ check_cert() {
 # Function to generate configurations
 generate_config() {
     local env=$1
-    python generate_env.py --env $env
+    python3 generate_env.py --env $env
 }
 
 # Function to start services

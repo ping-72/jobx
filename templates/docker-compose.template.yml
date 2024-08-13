@@ -7,9 +7,9 @@ services:
       - "{{ nginx_http_port }}:80"
       - "{{ nginx_https_port }}:443"
     volumes:
-      - ./nginx/{{ environment }}.conf:/etc/nginx/conf.d/default.conf:ro
-      - ../../certs/{{ environment }}:/etc/letsencrypt/live/{{ domain }}:ro
-      - ../../certs/{{ environment }}/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf:ro  # Add this line
+      - ./nginx/{{ environment }}.conf:/etc/nginx/conf.d/default.conf
+      - ../../certs/{{ environment }}:/etc/letsencrypt/live/{{ domain }}
+      - ../../certs/{{ environment }}/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf # Add this line
     depends_on:
       - backend_{{ environment }}
       - frontend_{{ environment }}
@@ -17,7 +17,7 @@ services:
       - app-network
 
   backend_{{ environment }}:
-    build: ../../server
+    build: ../../serverd
     expose:
       - "{{ backend_port }}"
     env_file:

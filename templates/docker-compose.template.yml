@@ -27,7 +27,7 @@ services:
   frontend_{{ environment }}:
     build: ../../client
     expose:
-      - "80"
+      - "{{ frontend_port }}"
     env_file:
       - ../../client/.env.client.{{ environment }}
     networks:

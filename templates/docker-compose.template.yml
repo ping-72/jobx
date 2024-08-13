@@ -9,6 +9,7 @@ services:
     volumes:
       - ./nginx/{{ environment }}.conf:/etc/nginx/conf.d/default.conf:ro
       - ../../certs/{{ environment }}:/etc/letsencrypt/live/{{ domain }}:ro
+      - ../../certs/{{ environment }}/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf:ro  # Add this line
     depends_on:
       - backend_{{ environment }}
       - frontend_{{ environment }}

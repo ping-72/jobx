@@ -45,7 +45,7 @@ services:
     build: 
       context: ../../client
       args:
-      - REACT_APP_BACKEND_URL=https://{{ domain }}:{{ backend_port }}
+      - REACT_APP_BACKEND_URL=https://{{ domain }}:{{ nginx_https_port }}
     expose:
       - "{{ frontend_port }}"
     env_file:

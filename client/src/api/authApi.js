@@ -2,6 +2,7 @@ import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API_URL = BACKEND_URL + "/api/auth";
+console.log("API URL:", API_URL);
 // const API_URL = 'https://jobx-32a058281844.herokuapp.com/api/auth';
 
 export const authenticateUser = async (

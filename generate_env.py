@@ -111,6 +111,7 @@ def generate_config_for_environment(config, environment, is_local):
     generate_env_files(env_config, is_local, environment)
     generate_docker_compose_file(env_config, is_local, environment)
     generate_nginx_config(env_config, is_local, environment)
+    generate_frontend_nginx_config(env_config, is_local, environment)
 
 def main():
     parser = argparse.ArgumentParser(description='Generate environment configurations.')

@@ -47,6 +47,8 @@ services:
       - "{{ frontend_port }}"
     env_file:
       - ../../client/.env.client.{{ environment }}
+    environment:
+      - REACT_APP_BACKEND_URL=https://{{ domain }}
     networks:
       - app-network-{{ environment }}
 

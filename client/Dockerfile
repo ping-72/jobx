@@ -6,6 +6,10 @@ COPY package*.json ./
 
 RUN npm install
 
+# Add ARG and ENV to pass the environment variable at build time
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+
 COPY . .
 
 RUN npm run build

@@ -42,13 +42,14 @@ services:
 
   frontend_{{ environment }}:
     container_name: frontend_{{ environment }}
-    build: ../../client
+    build: 
+      context: ../../client
+      args:
+      - REACT_APP_BACKEND_URL=https://{{ domain }}:{{ backend_port }}
     expose:
       - "{{ frontend_port }}"
     env_file:
       - ../../client/.env.client.{{ environment }}
-    environment:
-      - REACT_APP_BACKEND_URL=https://{{ domain }}
     networks:
       - app-network-{{ environment }}
 

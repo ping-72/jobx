@@ -1,7 +1,8 @@
 version: "3.8"
 
 services:
-  nginx:
+  nginx_{{ environment }}:
+    container_name: nginx_{{ environment }}
     image: nginx:latest
     ports:
       - "{{ nginx_http_port }}:80"
@@ -15,34 +16,41 @@ services:
       - backend_{{ environment }}
       - frontend_{{ environment }}
     networks:
-      - app-network
+      - app-network-{{ environment }}
   
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ../../data/certbot/conf:/etc/letsencrypt
-      - ../../data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  # certbot_{{ environment }}:
+  #   container_name: certbot_{{ environment }}
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ../../data/certbot/conf:/etc/letsencrypt
+  #     - ../../data/certbot/www:/var/www/certbot
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email admin@ruthi.in -d qa.ruthi.in --agree-tos
+  #   # entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  #   networks:
+  #     - app-network-{{ environment }}
 
 
   backend_{{ environment }}:
+    container_name: backend_{{ environment }}
     build: ../../server
     expose:
       - "{{ backend_port }}"
     env_file:
       - ../../server/.env.server.{{ environment }}
     networks:
-      - app-network
+      - app-network-{{ environment }}
 
   frontend_{{ environment }}:
+    container_name: frontend_{{ environment }}
     build: ../../client
     expose:
-      - "80"
+      - "{{ frontend_port }}"
     env_file:
       - ../../client/.env.client.{{ environment }}
     networks:
-      - app-network
+      - app-network-{{ environment }}
 
 networks:
-  app-network:
+  app-network-{{ environment }}:
+    name: app-network-{{ environment }}
     driver: bridge

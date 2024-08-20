@@ -90,6 +90,17 @@ def generate_nginx_config(config, is_local, environment):
     with open(f"{GENERATED_DIR}/{environment}/nginx/{environment}.conf", 'w') as file:
         file.write(nginx_content)
 
+def generate_frontend_nginx_config(config, is_local, environment):
+    if is_local:
+        print(f"Skipping Nginx config generation for {environment} environment.")
+        return
+
+    template = load_template(f"{ENV_TEMPLATES_DIR}/frontend-nginx.template.conf")
+    nginx_content = replace_variables(template, config)
+
+    with open(f"client/nginx/default.conf", 'w') as file:
+        file.write(nginx_content)
+
 def generate_config_for_environment(config, environment, is_local):
     env_config = config['environments'].get(environment)
     if not env_config:

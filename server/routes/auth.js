@@ -12,6 +12,9 @@ router.post("/login", AuthController.login);
 // Get User data based on authToken
 router.get("/user/info", authMiddleware, AuthController.getUser);
 
+// Route to verify email
+router.get("/verify-email", AuthController.verifyEmail);
+
 // Other authentication-related routes can be added here
 
 module.exports = router;

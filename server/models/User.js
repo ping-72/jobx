@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
     unique: false,
     trim: true,
   },
+  isVerified: { type: Boolean, default: false },
   hashed_password: {
     type: String,
     required: true,

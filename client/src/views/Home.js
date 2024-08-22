@@ -6,7 +6,7 @@ import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 import Nav from "../components/core/Nav";
 import StartInterviewModal from "../components/home/StartInterviewModal";
-import { fetchInterviewCounts } from "../api/homeApi";
+import { fetchInterviewCountsAPI } from "../api/homeApi";
 
 const MAX_ATTEMPTS = process.env.REACT_APP_MAX_ATTEMPTS || 5;
 console.log("Max attempts:", MAX_ATTEMPTS);
@@ -24,7 +24,7 @@ const Home = () => {
     if (storedAuthToken) {
       // Fetch the current count of interviews for the user
       setToken(storedAuthToken);
-      fetchInterviewCounts(storedAuthToken)
+      fetchInterviewCountsAPI(storedAuthToken)
         .then((response) => {
           // Assuming the response contains the count of interviews
           const interviewCount = response.data.count;

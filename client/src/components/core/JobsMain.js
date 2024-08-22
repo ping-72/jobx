@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, useDisclosure } from "@nextui-org/react";
-import { fetchJobs, addJob, updateJob, deleteJob } from "../../api/jobApi";
+import {
+  fetchJobsAPI,
+  addJobAPI,
+  updateJobAPI,
+  deleteJobAPI,
+} from "../../api/jobApi";
 import JobPostMain from "./JobPostMain";
 import AddJobModal from "./AddJobModal";
 import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
@@ -35,7 +40,7 @@ export default function JobsMain() {
 
   const fetchJobsFromApi = async () => {
     try {
-      const data = await fetchJobs(authToken, searchQuery, currentPage); // Pass authToken, searchQuery, and currentPage to fetchJobs function
+      const data = await fetchJobsAPI(authToken, searchQuery, currentPage); // Pass authToken, searchQuery, and currentPage to fetchJobsAPI function
       setJobs(data.jobs);
       setTotalPages(data.totalPages);
       setLoading(false);
@@ -47,7 +52,7 @@ export default function JobsMain() {
 
   const handleAddJob = async (newJobData) => {
     try {
-      await addJob(authToken, newJobData); // Pass authToken to addJob function
+      await addJobAPI(authToken, newJobData); // Pass authToken to addJobAPI function
       fetchJobsFromApi();
     } catch (error) {
       console.error("Error adding job:", error);
@@ -56,7 +61,7 @@ export default function JobsMain() {
 
   const handleUpdateJob = async (updatedJobData) => {
     try {
-      await updateJob(authToken, jobData._id.toString(), updatedJobData); // Pass authToken to updateJob function
+      await updateJobAPI(authToken, jobData._id.toString(), updatedJobData); // Pass authToken to updateJobAPI function
       fetchJobsFromApi();
     } catch (error) {
       console.error("Error updating job:", error);
@@ -73,7 +78,7 @@ export default function JobsMain() {
   const handleDelete = async (id) => {
     console.log("Deleting job with id:", id);
     try {
-      await deleteJob(authToken, id); // Pass authToken to deleteJob function
+      await deleteJobAPI(authToken, id); // Pass authToken to deleteJobAPI function
       fetchJobsFromApi();
     } catch (error) {
       console.error("Error deleting job:", error);

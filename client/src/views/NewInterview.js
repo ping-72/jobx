@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  fetchQuestions,
-  createInterview,
-  submitInterview,
+  fetchQuestionsAPI,
+  createInterviewAPI,
+  submitInterviewAPI,
 } from "../api/interviewApi";
 import QuestionDisplay from "../components/interview/QuestionDisplay";
 import QuestionCategoryModal from "../components/interview/QuestionTypeModal";
@@ -42,7 +42,7 @@ const InterviewPage = () => {
   };
 
   const fetchQuestionsData = (token) => {
-    fetchQuestions(token)
+    fetchQuestionsAPI(token)
       .then((response) => {
         const questionsResponse = response.data.Questions;
         setQuestions(questionsResponse);
@@ -87,7 +87,7 @@ const InterviewPage = () => {
     ) {
       hasCreatedInterview.current = true;
       let questionIds = questions.map((question) => question._id);
-      createInterview(authToken, userInfo._id, jobId, questionIds).catch(
+      createInterviewAPI(authToken, userInfo._id, jobId, questionIds).catch(
         (error) => {
           console.error("Error creating interview:", error);
         }
@@ -105,7 +105,7 @@ const InterviewPage = () => {
 
   const handleSubmit = () => {
     console.log("Submit button clicked");
-    submitInterview(authToken, userInfo._id, jobId)
+    submitInterviewAPI(authToken, userInfo._id, jobId)
       .then((response) => {
         console.log("Interview submitted successfully:", response);
         navigate("/thank-you");

@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const EmailService = require("../services/emailService");
+
 
 require("dotenv").config();
 
@@ -39,9 +41,12 @@ register = async (req, res) => {
 
     // Save the user document to the database
     await newUser.save();
+
+    // Send verification email
+    await EmailService.sendVerificationEmail(newUser);
     console.log("New User Saved");
 
-    res.status(201).json({ message: "Registration successful." });
+    res.status(201).json({ message: "Registration successful! Please check your email to verify your account." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Registration failed. Please try again." });
@@ -88,7 +93,34 @@ login = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+verifyEmail = async (req, res) => {
+  const token = req.query.token;
+  if (!token) {
+      return res.status(400).send("Invalid or missing token");
+  }
+
+  try {
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+      const user = await User.findById(decoded.userId);
+
+      if (!user) {
+          return res.status(404).send("User not found");
+      }
+
+      if (user.isVerified) {
+          return res.status(400).send("Email is already verified");
+      }
+
+      user.isVerified = true;
+      await user.save();
+
+      return res.status(200).send("Email verified successfully!");
+  } catch (error) {
+      return res.status(400).send("Invalid or expired token");
+  }
+};
+
+getUser = async (req, res) => {
   try {
     // Fetch user info based on the authenticated user
     const userId = req.user.id;
@@ -114,6 +146,7 @@ const AuthController = {
   register,
   login,
   getUser,
+  verifyEmail
 };
 
 module.exports = AuthController;

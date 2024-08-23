@@ -32,6 +32,11 @@ export default function Login() {
     loginUserAPI(loginState, showNotification, setToken, setUserInfo, navigate);
   };
 
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    navigate("/forgot-password");
+  };
+
   return (
     <div>
       {notification && (
@@ -80,7 +85,7 @@ export default function Login() {
                 Remember me
               </Checkbox>
             </div>
-            <a href="#" className="text-sm font-normal text-blue-700">
+            <a href="#" onClick={handleForgotPassword} className="text-sm font-normal text-blue-700">
               Forgot password?
             </a>
           </div>

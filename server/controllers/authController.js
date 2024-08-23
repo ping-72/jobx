@@ -120,6 +120,46 @@ verifyEmail = async (req, res) => {
   }
 };
 
+// Forgot Password Endpoint
+forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await EmailService.sendPasswordResetMail(user);
+    res.json({ message: "Password reset link sent" });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred. Please try again." });
+  }
+};
+
+resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+  console.log("hello....")
+  try {
+    console.log("token", token);
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+    console.log("decoded", decoded);
+    const user = await User.findById(decoded.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.password = password; // Assuming password is hashed in pre-save middleware
+    await user.save();
+
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    res.status(400).json({ message: "Invalid or expired token" });
+  }
+};
+
 getUser = async (req, res) => {
   try {
     // Fetch user info based on the authenticated user
@@ -167,6 +207,8 @@ const AuthController = {
   login,
   getUser,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
   resendVerificationEmail
 };
 

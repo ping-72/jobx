@@ -36,8 +36,39 @@ const sendVerificationEmail = async (user) => {
     }
 };
 
+const sendPasswordResetMail = async (user) => {
+    try {
+        const token = jwt.sign(
+            { userId: user._id }, // Payload
+            process.env.JWT_TOKEN_SECRET_KEY, // Secret key
+            { expiresIn: "1h" } // Token expires in 1 hour
+        );
+
+        const resetLink = `${process.env.DOMAIN}:${process.env.FRONTEND_PORT}/reset-password?token=${token}`;
+        const htmlTemplate = fs.readFileSync(path.join(__dirname, "../assets/password-reset-email.html"), "utf8");
+        const customizedHtml = htmlTemplate
+            .replace(/Jane/g, user.username)
+            .replace(/{reset_link}/g, resetLink);
+
+        const msg = {
+            to: user.email,
+            from: "noreply@ruthi.in",
+            subject: "Ruthi: Password Reset",
+            html: customizedHtml,
+        };
+
+        await sgMail.send(msg);
+        console.log("Password reset email sent to:", user.email);
+    } catch (error) {
+        console.error("Error sending password reset email:", error);
+        throw new Error("Could not send password reset email");
+    }
+
+}
+
 const EmailService = {
     sendVerificationEmail,
+    sendPasswordResetMail
 };
 
 module.exports = EmailService;

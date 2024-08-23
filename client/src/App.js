@@ -18,6 +18,8 @@ import LandingPage from "./components/Test";
 import LandingTest from "./components/LandingTest"
 import VerificationPage from "./views/Verification";
 import VerifyEmailPrompt from "./views/VerifyEmail";
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
 // import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
             <Route path="/new-landing" element={<NewLandingPage />} />
             <Route path="/verification" element={<VerificationPage />} />
             <Route path="/verify-email-prompt" element={<VerifyEmailPrompt />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </BrowserRouter>
       </NextUIProvider>

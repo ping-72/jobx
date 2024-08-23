@@ -13,7 +13,9 @@ router.post("/login", AuthController.login);
 router.get("/user/info", authMiddleware, AuthController.getUser);
 
 // Route to verify email
-router.get("/verify-email", AuthController.verifyEmail);
+router.post("/verify-email", AuthController.verifyEmail);
+
+router.post('/resend-verification-email', AuthController.resendVerificationEmail);
 
 // Other authentication-related routes can be added here
 

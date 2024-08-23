@@ -16,7 +16,7 @@ let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
-  const { setToken } = useAuth();
+  const { setToken, setUserInfo } = useAuth();
   const [loginState, setLoginState] = useState(fieldsState);
   const navigate = useNavigate();
 
@@ -29,9 +29,7 @@ export default function Login() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    loginUserAPI(loginState, showNotification, setToken, () =>
-      navigate("/home")
-    );
+    loginUserAPI(loginState, showNotification, setToken, setUserInfo, navigate);
   };
 
   return (

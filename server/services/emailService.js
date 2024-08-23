@@ -14,7 +14,7 @@ const sendVerificationEmail = async (user) => {
             { expiresIn: "24h" } // Token expires in 24 hours
         );
 
-        const verificationLink = `${process.env.DOMAIN}/api/auth/verify-email?token=${token}`;
+        const verificationLink = `${process.env.DOMAIN}:${process.env.FRONTEND_PORT}/verification?token=${token}`;
 
         const htmlTemplate = fs.readFileSync(path.join(__dirname, "../assets/email-template.html"), "utf8");
         const customizedHtml = htmlTemplate

@@ -17,6 +17,21 @@ module.exports = {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
         inter: ['Inter', 'sans-serif'],
       },
+      animation: {
+        'spin-slow': 'spin 1s linear infinite',
+        'fade-out': 'fadeOut 0.5s ease-out forwards',
+        'fade-in': 'fadeIn 0.5s ease-in forwards',
+      },
+      keyframes: {
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
     },
   },
   darkMode: "class",

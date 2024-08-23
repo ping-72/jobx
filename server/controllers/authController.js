@@ -94,7 +94,7 @@ login = async (req, res) => {
 };
 
 verifyEmail = async (req, res) => {
-  const token = req.query.token;
+  const token = req.body.token;
   if (!token) {
       return res.status(400).send("Invalid or missing token");
   }
@@ -130,15 +130,35 @@ getUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     // Extract username and send it in the response
-    res.json({
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      _id: userId,
-    });
+    res.json(user);
   } catch (error) {
     console.error("Error fetching user info:", error);
     res.status(500).json({ message: "Error fetching user info" });
+  }
+};
+
+resendVerificationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email is required." });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User is already verified." });
+    }
+
+    // Send verification email again
+    await EmailService.sendVerificationEmail(user);
+    res.status(200).json({ message: "Verification email sent." });
+  } catch (error) {
+    console.error("Error resending verification email:", error);
+    res.status(500).json({ message: "Failed to resend verification email." });
   }
 };
 
@@ -146,7 +166,8 @@ const AuthController = {
   register,
   login,
   getUser,
-  verifyEmail
+  verifyEmail,
+  resendVerificationEmail
 };
 
 module.exports = AuthController;

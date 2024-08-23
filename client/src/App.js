@@ -16,6 +16,9 @@ import NewInterview from "./views/NewInterview";
 import NewLandingPage from "./views/NewLanding";
 import LandingPage from "./components/Test";
 import LandingTest from "./components/LandingTest"
+import VerificationPage from "./views/Verification";
+import LoadingToTick from "./views/LoadingToTick";
+import VerifyEmailPrompt from "./views/VerifyEmail";
 // import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
@@ -36,6 +39,9 @@ function App() {
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/new-interview" element={<NewInterview />} />
             <Route path="/new-landing" element={<NewLandingPage />} />
+            <Route path="/verification" element={<VerificationPage />} />
+            <Route path="/loading" element={<LoadingToTick />} />
+            <Route path="/verify-email-prompt" element={<VerifyEmailPrompt />} />
           </Routes>
         </BrowserRouter>
       </NextUIProvider>

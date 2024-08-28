@@ -3,7 +3,7 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API_URL = BACKEND_URL + "/api/interview";
 
-export const fetchQuestions = async (authToken) => {
+export const fetchQuestionsAPI = async (authToken) => {
   return axios.get(`${API_URL}/questions`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
@@ -11,7 +11,7 @@ export const fetchQuestions = async (authToken) => {
   });
 };
 
-export const createInterview = async (
+export const createInterviewAPI = async (
   authToken,
   userId,
   jobId,
@@ -28,7 +28,7 @@ export const createInterview = async (
   );
 };
 
-export const submitInterview = async (authToken, userId, jobId) => {
+export const submitInterviewAPI = async (authToken, userId, jobId) => {
   return axios.post(
     `${API_URL}/submit-interview`,
     { userId, jobId },

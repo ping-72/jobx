@@ -1,7 +1,8 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const EmailService = require("../services/emailService");
+
 
 require("dotenv").config();
 
@@ -40,9 +41,12 @@ register = async (req, res) => {
 
     // Save the user document to the database
     await newUser.save();
+
+    // Send verification email
+    await EmailService.sendVerificationEmail(newUser);
     console.log("New User Saved");
 
-    res.status(201).json({ message: "Registration successful." });
+    res.status(201).json({ message: "Registration successful! Please check your email to verify your account." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Registration failed. Please try again." });
@@ -89,7 +93,74 @@ login = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+verifyEmail = async (req, res) => {
+  const token = req.body.token;
+  if (!token) {
+      return res.status(400).send("Invalid or missing token");
+  }
+
+  try {
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+      const user = await User.findById(decoded.userId);
+
+      if (!user) {
+          return res.status(404).send("User not found");
+      }
+
+      if (user.isVerified) {
+          return res.status(400).send("Email is already verified");
+      }
+
+      user.isVerified = true;
+      await user.save();
+
+      return res.status(200).send("Email verified successfully!");
+  } catch (error) {
+      return res.status(400).send("Invalid or expired token");
+  }
+};
+
+// Forgot Password Endpoint
+forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await EmailService.sendPasswordResetMail(user);
+    res.json({ message: "Password reset link sent" });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred. Please try again." });
+  }
+};
+
+resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+  console.log("hello....")
+  try {
+    console.log("token", token);
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+    console.log("decoded", decoded);
+    const user = await User.findById(decoded.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.password = password; // Assuming password is hashed in pre-save middleware
+    await user.save();
+
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    res.status(400).json({ message: "Invalid or expired token" });
+  }
+};
+
+getUser = async (req, res) => {
   try {
     // Fetch user info based on the authenticated user
     const userId = req.user.id;
@@ -99,15 +170,35 @@ const getUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     // Extract username and send it in the response
-    res.json({
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      _id: userId,
-    });
+    res.json(user);
   } catch (error) {
     console.error("Error fetching user info:", error);
     res.status(500).json({ message: "Error fetching user info" });
+  }
+};
+
+resendVerificationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email is required." });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User is already verified." });
+    }
+
+    // Send verification email again
+    await EmailService.sendVerificationEmail(user);
+    res.status(200).json({ message: "Verification email sent." });
+  } catch (error) {
+    console.error("Error resending verification email:", error);
+    res.status(500).json({ message: "Failed to resend verification email." });
   }
 };
 
@@ -115,6 +206,10 @@ const AuthController = {
   register,
   login,
   getUser,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  resendVerificationEmail
 };
 
 module.exports = AuthController;

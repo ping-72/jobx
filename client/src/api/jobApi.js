@@ -3,7 +3,7 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API_URL = BACKEND_URL + "/api/";
 
-export const fetchJobs = async (
+export const fetchJobsAPI = async (
   authToken,
   searchQuery = "",
   page = 1,
@@ -27,7 +27,7 @@ export const fetchJobs = async (
   }
 };
 
-export const addJob = async (authToken, newJobData) => {
+export const addJobAPI = async (authToken, newJobData) => {
   try {
     await axios.post(`${API_URL}/jobs`, newJobData, {
       headers: {
@@ -40,7 +40,7 @@ export const addJob = async (authToken, newJobData) => {
   }
 };
 
-export const updateJob = async (authToken, id, updatedJobData) => {
+export const updateJobAPI = async (authToken, id, updatedJobData) => {
   try {
     await axios.put(`${API_URL}/jobs/${id}`, updatedJobData, {
       headers: {
@@ -53,7 +53,7 @@ export const updateJob = async (authToken, id, updatedJobData) => {
   }
 };
 
-export const deleteJob = async (authToken, id) => {
+export const deleteJobAPI = async (authToken, id) => {
   try {
     await axios.delete(`${API_URL}/jobs/${id}`, {
       headers: {

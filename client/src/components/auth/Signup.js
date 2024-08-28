@@ -7,7 +7,7 @@ import FormAction from "../FormAction";
 import NotificationBanner from "../NotificationBanner";
 import useNotification from "../../services/useNotification";
 import { useNavigate } from "react-router-dom";
-import { saveUserToDB } from "../../api/authApi";
+import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
 
 export default function Signup() {
@@ -134,7 +134,7 @@ export default function Signup() {
 
     if (is_valid) {
       setIsSubmitting(true);
-      saveUserToDB(
+      registerUserAPI(
         { ...signUpState, role: isEmployer ? "recruiter" : "candidate" },
         showNotification,
         () => navigate("/login")

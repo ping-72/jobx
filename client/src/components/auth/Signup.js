@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
 import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
+import { TextGenerateEffect } from "../../ui/text-generate-effect";
 
 export default function Signup() {
   const [isEmployer, setIsEmployer] = useState(false);
@@ -144,9 +145,11 @@ export default function Signup() {
   };
 
   const fields = isEmployer ? employerSignupFields : candidateSignupFields;
+  const words =
+    "A platform for job-seekers to practice interviews and get evaluated. Hone your skills and get ready for your dream job with real-time feedback and tailored advice.";
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-bl from-blue-500 to-orange-500">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       {notification && (
         <NotificationBanner
           message={notification.message}
@@ -155,25 +158,23 @@ export default function Signup() {
         />
       )}
       {/* Left Side */}
-      <div className="w-full lg:w-1/2 text-white p-2 lg:p-4 flex flex-col items-center justify-center z-10">
-        <div className="flex items-center mr-16">
+      <div className="w-full lg:w-[55%] text-white p-4 lg:p-6 flex flex-col items-center justify-center bg-gradient-to-r from-blue-600 via-blue-500 to-transparent">
+        <div className="flex items-center justify-center mr-14">
           <img
             src={Ruthi_full_Logo}
             alt="Ruthi Logo"
-            className="w-24 lg:w-64 h-auto m-4"
+            className="w-24 lg:w-64 h-auto mb-3"
           />
         </div>
-        <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
-          A platform for job-seekers to practice interviews and get evaluated.
-          Hone your skills and get ready for your dream job with real-time
-          feedback and tailored advice.
+        <p className="text-base lg:text-xl leading-relaxed text-start">
+          <TextGenerateEffect duration={2} filter={false} words={words} />
         </p>
       </div>
 
       {/* Right Side */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative">
+      <div className="w-full lg:w-[45%] flex items-center justify-center p-4 lg:p-8 relative">
         {/* Form Container */}
-        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto shadow-lg bg-white opacity-90">
+        <div className="relative p-4 lg:p-6 rounded-xl w-full max-w-md z-10 lg:mr-8 overflow-auto shadow-2xl bg-white opacity-85">
           <h1 className="text-2xl lg:text-3xl font-bold text-blue-700 mb-4">
             Create an Account
           </h1>
@@ -219,12 +220,12 @@ export default function Signup() {
               />
             ))}
             <div className="mt-2">
-            <FormAction
-              handleClick={handleSubmitSignUp}
-              text="Sign Up"
-              loading={isSubmitting}
-              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
-            />
+              <FormAction
+                handleClick={handleSubmitSignUp}
+                text="Sign Up"
+                loading={isSubmitting}
+                customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              />
             </div>
           </form>
 

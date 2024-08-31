@@ -8,6 +8,7 @@ import { loginUserAPI } from "../../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
+import { TextGenerateEffect } from "../../ui/text-generate-effect";
 
 // import {Input} from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
@@ -37,9 +38,10 @@ export default function Login() {
     e.preventDefault();
     navigate("/forgot-password");
   };
+  const words = "Welcome back! Please enter your details.";
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-bl from-orange-500 to-blue-500">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       {notification && (
         <NotificationBanner
           message={notification.message}
@@ -49,7 +51,7 @@ export default function Login() {
       )}
 
       {/* Left Side Content*/}
-      <div className="w-full lg:w-1/2 text-white p-4 lg:p-6 flex flex-col items-center justify-center z-10">
+      <div className="w-full lg:w-[55%] text-white p-4 lg:p-6 flex flex-col items-center justify-center bg-gradient-to-r from-blue-600 via-blue-500 to-transparent">
         <div className="flex items-center justify-center mr-14">
           <img
             src={Ruthi_full_Logo}
@@ -57,14 +59,14 @@ export default function Login() {
             className="w-24 lg:w-64 h-auto mb-3"
           />
         </div>
-        <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
-          Welcome back! Please enter your details.
+        <p className="text-base lg:text-xl leading-relaxed text-start">
+          <TextGenerateEffect duration={2} filter={false} words={words} />
         </p>
       </div>
 
       {/* Right Side Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative">
-        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 shadow-lg bg-white opacity-90">
+      <div className="w-full lg:w-[45%] flex items-center justify-center p-4 lg:p-8 relative">
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 shadow-2xl bg-white opacity-85">
           <h2 className="text-2xl lg:text-3xl font-bold text-blue-700 mb-4">
             Sign In
           </h2>

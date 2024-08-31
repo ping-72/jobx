@@ -148,7 +148,7 @@ export default function Signup() {
   const fields = isEmployer ? employerSignupFields : candidateSignupFields;
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-bl from-blue-500 to-orange-500">
       {notification && (
         <NotificationBanner
           message={notification.message}
@@ -157,36 +157,43 @@ export default function Signup() {
         />
       )}
       {/* Left Side */}
-      <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-start justify-center z-10">
-        <div className="flex items-center">
+      <div className="w-full lg:w-1/2 text-white p-4 lg:p-6 flex flex-col items-center justify-center z-10">
+        <div className="flex items-center mr-16">
           <img
             src={Ruthi_logo}
             alt="Ruthi Logo"
-            className="w-20 lg:w-24 h-auto mb-3"
+            className="w-24 lg:w-36 h-auto mb-3"
           />
-          <h1 className="text-4xl lg:text-5xl font-bold text-center">Ruthi</h1>
+          <h1 className="text-4xl lg:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-blue-900 font-mono">
+            Ruthi
+          </h1>
         </div>
-        <p className="text-base lg:text-lg max-w-xs lg:max-w-sm leading-relaxed text-start">
+        <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
           A platform for job-seekers to practice interviews and get evaluated.
           Hone your skills and get ready for your dream job with real-time
           feedback and tailored advice.
         </p>
       </div>
 
-      {/* Right Side */}
-      <div className="w-full lg:w-2/3 flex items-center justify-end p-4 lg:p-8 relative">
-        <div className="fixed inset-0 overflow-hidden z-0 hidden lg:block">
-          <img
-            src={wavesNegative}
-            alt="SVG Curve"
-            className="absolute right-0 top-0 h-full w-full object-cover"
-            style={{ transform: "rotate(90deg)" }}
-          />
-        </div>
+      <div class="custom-shape-divider-bottom-1725100452">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            class="shape-fill"
+          ></path>
+        </svg>
+      </div>
 
+      {/* Right Side */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative">
         {/* Form Container */}
-        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto">
-          <h1 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-4">
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto shadow-lg bg-white opacity-90">
+          <h1 className="text-2xl lg:text-3xl font-bold text-blue-700 mb-4">
             Create an Account
           </h1>
 
@@ -235,7 +242,7 @@ export default function Signup() {
               handleClick={handleSubmitSignUp}
               text="Sign Up"
               loading={isSubmitting}
-              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white mt-6"
+              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
             />
           </form>
 

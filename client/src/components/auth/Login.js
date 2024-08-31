@@ -7,8 +7,7 @@ import useNotification from "../../services/useNotification";
 import { loginUserAPI } from "../../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Ruthi_logo from "../../assets/Ruthi_logo.png";
-import wavesNegative from "../../assets/wavesNegative.svg";
+import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
 
 // import {Input} from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
@@ -49,31 +48,14 @@ export default function Login() {
         />
       )}
 
-      <div class="custom-shape-divider-bottom-1725100452">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            class="shape-fill"
-          ></path>
-        </svg>
-      </div>
-
       {/* Left Side Content*/}
       <div className="w-full lg:w-1/2 text-white p-4 lg:p-6 flex flex-col items-center justify-center z-10">
-        <div className="flex items-center mr-16">
+        <div className="flex items-center justify-center mr-14">
           <img
-            src={Ruthi_logo}
+            src={Ruthi_full_Logo}
             alt="Ruthi Logo"
-            className="w-24 lg:w-36 h-auto mb-3"
+            className="w-24 lg:w-64 h-auto mb-3"
           />
-          <h1 className="text-4xl lg:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-blue-900 font-mono">
-            Ruthi
-          </h1>
         </div>
         <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
           Welcome back! Please enter your details.
@@ -125,10 +107,7 @@ export default function Login() {
           </form>
           <p className="mt-4 text-sm text-gray-600 text-center">
             Not a user?{" "}
-            <a
-              href="/signup"
-              className="text-blue-700 font-semibold"
-            >
+            <a href="/signup" className="text-blue-700 font-semibold">
               Sign up
             </a>
           </p>

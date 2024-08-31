@@ -9,9 +9,7 @@ import useNotification from "../../services/useNotification";
 import { useNavigate } from "react-router-dom";
 import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
-import Ruthi_logo from "../../assets/Ruthi_logo.png";
-import wavesNegative from "../../assets/wavesNegative.svg";
-import wavesNegative1 from "../../assets/wavesNegative1.svg";
+import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
 
 export default function Signup() {
   const [isEmployer, setIsEmployer] = useState(false);
@@ -157,36 +155,19 @@ export default function Signup() {
         />
       )}
       {/* Left Side */}
-      <div className="w-full lg:w-1/2 text-white p-4 lg:p-6 flex flex-col items-center justify-center z-10">
+      <div className="w-full lg:w-1/2 text-white p-2 lg:p-4 flex flex-col items-center justify-center z-10">
         <div className="flex items-center mr-16">
           <img
-            src={Ruthi_logo}
+            src={Ruthi_full_Logo}
             alt="Ruthi Logo"
-            className="w-24 lg:w-36 h-auto mb-3"
+            className="w-24 lg:w-64 h-auto m-4"
           />
-          <h1 className="text-4xl lg:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-blue-900 font-mono">
-            Ruthi
-          </h1>
         </div>
         <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
           A platform for job-seekers to practice interviews and get evaluated.
           Hone your skills and get ready for your dream job with real-time
           feedback and tailored advice.
         </p>
-      </div>
-
-      <div class="custom-shape-divider-bottom-1725100452">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            class="shape-fill"
-          ></path>
-        </svg>
       </div>
 
       {/* Right Side */}
@@ -237,13 +218,14 @@ export default function Signup() {
                 errorMessage={field.errorMessage}
               />
             ))}
-
+            <div className="mt-2">
             <FormAction
               handleClick={handleSubmitSignUp}
               text="Sign Up"
               loading={isSubmitting}
               customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
             />
+            </div>
           </form>
 
           <p className="mt-4 text-sm text-gray-600 text-center">

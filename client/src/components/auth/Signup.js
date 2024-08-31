@@ -9,6 +9,8 @@ import useNotification from "../../services/useNotification";
 import { useNavigate } from "react-router-dom";
 import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
+import Ruthi_logo from "../../assets/Ruthi_logo.png";
+import wavesNegative from "../../assets/wavesNegative.svg";
 
 export default function Signup() {
   const [isEmployer, setIsEmployer] = useState(false);
@@ -145,17 +147,9 @@ export default function Signup() {
   const fields = isEmployer ? employerSignupFields : candidateSignupFields;
 
   return (
-    <div>
-      {notification && (
-        <NotificationBanner
-          message={notification.message}
-          type={notification.type}
-          onClose={closeNotification}
-        />
-      )}
-
+    <div className="flex flex-col lg:flex-row min-h-screen">
       {/* Left Side */}
-      <div className="flex flex-col items-center justify-center w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 lg:fixed lg:left-0 lg:top-0 lg:bottom-0 z-10">
+      <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-center justify-center z-10">
         <div className="flex flex-col items-center mb-6">
           <img
             src={Ruthi_logo}
@@ -172,7 +166,7 @@ export default function Signup() {
       </div>
 
       {/* Right Side */}
-      <div className="flex-grow flex items-center justify-center lg:justify-end w-full lg:w-2/3 p-4 lg:p-8 lg:ml-1/3">
+      <div className="w-full lg:w-2/3 flex items-center justify-end p-4 lg:p-8 relative">
         <div className="fixed inset-0 overflow-hidden z-0 hidden lg:block">
           <img
             src={wavesNegative}
@@ -183,7 +177,7 @@ export default function Signup() {
         </div>
 
         {/* Form Container */}
-        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10">
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto">
           <h1 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-4">
             Create an Account
           </h1>
@@ -211,7 +205,7 @@ export default function Signup() {
             </button>
           </div>
 
-          <div className="space-y-3 mb-2">
+          <form onSubmit={handleSubmitSignUp} className="space-y-3 mb-2">
             {fields.map((field) => (
               <InputField
                 key={field.id}
@@ -228,14 +222,15 @@ export default function Signup() {
                 errorMessage={field.errorMessage}
               />
             ))}
-          </div>
 
-          <FormAction
-            handleClick={handleSubmitSignUp}
-            text="Sign Up"
-            loading={isSubmitting}
-            customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white mt-6"
-          />
+            <FormAction
+              handleClick={handleSubmitSignUp}
+              text="Sign Up"
+              loading={isSubmitting}
+              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white mt-6"
+            />
+          </form>
+
           <p className="mt-4 text-sm text-gray-600 text-center">
             Already a user?{" "}
             <a href="/login" className="text-blue-700 font-semibold">
@@ -244,6 +239,14 @@ export default function Signup() {
           </p>
         </div>
       </div>
+
+      {notification && (
+        <NotificationBanner
+          message={notification.message}
+          type={notification.type}
+          onClose={closeNotification}
+        />
+      )}
     </div>
   );
 }

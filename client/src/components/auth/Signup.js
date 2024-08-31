@@ -154,33 +154,64 @@ export default function Signup() {
         />
       )}
 
-      <div
-        className="flex flex-col items-center justify-center "
-        style={{ height: "85vh" }}
-      >
-        <div className="bg-white p-5 lg:p-8 rounded shadow-xl border-1 border-slate-100 w-11/12 lg:w-96 mx-2">
-          <h1 className="text-2xl font-bold mb-4 text-gray-600 text-center">
-            Sign Up
+      {/* Left Side */}
+      <div className="flex flex-col items-center justify-center w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 lg:fixed lg:left-0 lg:top-0 lg:bottom-0 z-10">
+        <div className="flex flex-col items-center mb-6">
+          <img
+            src={Ruthi_logo}
+            alt="Ruthi Logo"
+            className="w-20 lg:w-24 h-auto mb-3"
+          />
+          <h1 className="text-3xl lg:text-5xl font-bold text-center">Ruthi</h1>
+        </div>
+        <p className="text-base lg:text-lg max-w-xs lg:max-w-sm leading-relaxed text-center">
+          A platform for job-seekers to practice interviews and get evaluated.
+          Hone your skills and get ready for your dream job with real-time
+          feedback and tailored advice.
+        </p>
+      </div>
+
+      {/* Right Side */}
+      <div className="flex-grow flex items-center justify-center lg:justify-end w-full lg:w-2/3 p-4 lg:p-8 lg:ml-1/3">
+        <div className="fixed inset-0 overflow-hidden z-0 hidden lg:block">
+          <img
+            src={wavesNegative}
+            alt="SVG Curve"
+            className="absolute right-0 top-0 h-full w-full object-cover"
+            style={{ transform: "rotate(90deg)" }}
+          />
+        </div>
+
+        {/* Form Container */}
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10">
+          <h1 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-4">
+            Create an Account
           </h1>
-          <div className="mb-4">
-            <div className="flex justify-center mb-4">
-              <button
-                className={`px-4 py-2 mr-2 ${
-                  !isEmployer ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
-                onClick={() => setIsEmployer(false)}
-              >
-                Candidate
-              </button>
-              <button
-                className={`px-4 py-2 ${
-                  isEmployer ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
-                onClick={() => setIsEmployer(true)}
-              >
-                Employer
-              </button>
-            </div>
+
+          <div className="flex space-x-3 mb-4">
+            <button
+              className={`flex-1 px-3 py-2 text-sm ${
+                !isEmployer
+                  ? "bg-orange-600 text-white"
+                  : "bg-gray-200 text-gray-700"
+              } rounded-full transition-colors duration-300`}
+              onClick={() => setIsEmployer(false)}
+            >
+              Candidate
+            </button>
+            <button
+              className={`flex-1 px-3 py-2 text-sm ${
+                isEmployer
+                  ? "bg-orange-600 text-white"
+                  : "bg-gray-200 text-gray-700"
+              } rounded-full transition-colors duration-300`}
+              onClick={() => setIsEmployer(true)}
+            >
+              Employer
+            </button>
+          </div>
+
+          <div className="space-y-3 mb-2">
             {fields.map((field) => (
               <InputField
                 key={field.id}
@@ -203,6 +234,7 @@ export default function Signup() {
             handleClick={handleSubmitSignUp}
             text="Sign Up"
             loading={isSubmitting}
+            customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white mt-6"
           />
           <p className="mt-4 text-sm text-gray-600 text-center">
             Already a user?{" "}

@@ -11,6 +11,7 @@ import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
 import Ruthi_logo from "../../assets/Ruthi_logo.png";
 import wavesNegative from "../../assets/wavesNegative.svg";
+import wavesNegative1 from "../../assets/wavesNegative1.svg";
 
 export default function Signup() {
   const [isEmployer, setIsEmployer] = useState(false);
@@ -149,16 +150,16 @@ export default function Signup() {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
       {/* Left Side */}
-      <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-center justify-center z-10">
-        <div className="flex flex-col items-center mb-6">
+      <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-start justify-center z-10">
+        <div className="flex items-center">
           <img
             src={Ruthi_logo}
             alt="Ruthi Logo"
             className="w-20 lg:w-24 h-auto mb-3"
           />
-          <h1 className="text-3xl lg:text-5xl font-bold text-center">Ruthi</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold text-center">Ruthi</h1>
         </div>
-        <p className="text-base lg:text-lg max-w-xs lg:max-w-sm leading-relaxed text-center">
+        <p className="text-base lg:text-lg max-w-xs lg:max-w-sm leading-relaxed text-start">
           A platform for job-seekers to practice interviews and get evaluated.
           Hone your skills and get ready for your dream job with real-time
           feedback and tailored advice.

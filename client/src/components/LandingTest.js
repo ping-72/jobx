@@ -11,10 +11,15 @@ const RuthiLandingPage = () => {
           <header className="flex justify-between items-center py-6">
             <h1 className="text-4xl font-bold text-blue-600">Ruthi</h1>
             <div className="space-x-4">
-              <button className="px-6 py-3 text-[#FF4D00] border-2 border-[#FF4D00] rounded-md font-semibold transition duration-300 ease-in-out hover:bg-orange-50 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#FF4D00] focus:ring-opacity-50">
+              <button className="px-6 py-3 text-[#FF4D00] border-2 border-[#FF4D00] rounded-md font-semibold transition duration-300 ease-in-out hover:bg-orange-50 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#FF4D00] focus:ring-opacity-50"
+              onClick={()=>{
+                window.location.href = "/login";
+              }}>
                 Log in
               </button>
-              <button className="px-6 py-3 bg-[#FF4D00] text-white rounded-md font-semibold transition duration-300 ease-in-out hover:bg-[#ef9d7f] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#FF4D00] focus:ring-opacity-50">
+              <button className="px-6 py-3 bg-[#FF4D00] text-white rounded-md font-semibold transition duration-300 ease-in-out hover:bg-[#ef9d7f] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#FF4D00] focus:ring-opacity-50" onClick={()=>{
+                window.location.href = "/signup";
+              }}>
                 Sign Up
               </button>
             </div>

@@ -9,9 +9,7 @@ import useNotification from "../../services/useNotification";
 import { useNavigate } from "react-router-dom";
 import { registerUserAPI } from "../../api/authApi";
 import InputField from "../Input";
-import Ruthi_logo from "../../assets/Ruthi_logo.png";
-import wavesNegative from "../../assets/wavesNegative.svg";
-import wavesNegative1 from "../../assets/wavesNegative1.svg";
+import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
 
 export default function Signup() {
   const [isEmployer, setIsEmployer] = useState(false);
@@ -148,7 +146,7 @@ export default function Signup() {
   const fields = isEmployer ? employerSignupFields : candidateSignupFields;
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-bl from-blue-500 to-orange-500">
       {notification && (
         <NotificationBanner
           message={notification.message}
@@ -157,16 +155,15 @@ export default function Signup() {
         />
       )}
       {/* Left Side */}
-      <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-start justify-center z-10">
-        <div className="flex items-center">
+      <div className="w-full lg:w-1/2 text-white p-2 lg:p-4 flex flex-col items-center justify-center z-10">
+        <div className="flex items-center mr-16">
           <img
-            src={Ruthi_logo}
+            src={Ruthi_full_Logo}
             alt="Ruthi Logo"
-            className="w-20 lg:w-24 h-auto mb-3"
+            className="w-24 lg:w-64 h-auto m-4"
           />
-          <h1 className="text-4xl lg:text-5xl font-bold text-center">Ruthi</h1>
         </div>
-        <p className="text-base lg:text-lg max-w-xs lg:max-w-sm leading-relaxed text-start">
+        <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
           A platform for job-seekers to practice interviews and get evaluated.
           Hone your skills and get ready for your dream job with real-time
           feedback and tailored advice.
@@ -174,19 +171,10 @@ export default function Signup() {
       </div>
 
       {/* Right Side */}
-      <div className="w-full lg:w-2/3 flex items-center justify-end p-4 lg:p-8 relative">
-        <div className="fixed inset-0 overflow-hidden z-0 hidden lg:block">
-          <img
-            src={wavesNegative}
-            alt="SVG Curve"
-            className="absolute right-0 top-0 h-full w-full object-cover"
-            style={{ transform: "rotate(90deg)" }}
-          />
-        </div>
-
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative">
         {/* Form Container */}
-        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto">
-          <h1 className="text-2xl lg:text-3xl font-bold text-orange-500 mb-4">
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 overflow-auto shadow-lg bg-white opacity-90">
+          <h1 className="text-2xl lg:text-3xl font-bold text-blue-700 mb-4">
             Create an Account
           </h1>
 
@@ -230,13 +218,14 @@ export default function Signup() {
                 errorMessage={field.errorMessage}
               />
             ))}
-
+            <div className="mt-2">
             <FormAction
               handleClick={handleSubmitSignUp}
               text="Sign Up"
               loading={isSubmitting}
-              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white mt-6"
+              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
             />
+            </div>
           </form>
 
           <p className="mt-4 text-sm text-gray-600 text-center">

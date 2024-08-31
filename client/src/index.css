@@ -76,3 +76,24 @@ code {
   top: 80px;
   opacity: 0.15;
 }
+
+.custom-shape-divider-bottom-1725100452 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 0;
+}
+
+.custom-shape-divider-bottom-1725100452 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 269px;
+}
+
+.custom-shape-divider-bottom-1725100452 .shape-fill {
+  fill: #004E98;
+}

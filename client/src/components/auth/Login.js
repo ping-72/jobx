@@ -7,8 +7,7 @@ import useNotification from "../../services/useNotification";
 import { loginUserAPI } from "../../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Ruthi_logo from "../../assets/Ruthi_logo.png";
-import wavesNegative from "../../assets/wavesNegative.svg";
+import Ruthi_full_Logo from "../../assets/Ruthi_full_Logo.png";
 
 // import {Input} from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
@@ -40,7 +39,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-bl from-orange-500 to-blue-500">
       {notification && (
         <NotificationBanner
           message={notification.message}
@@ -49,39 +48,27 @@ export default function Login() {
         />
       )}
 
-      <div className="w-full lg:w-[45%] bg-blue-900 text-white p-6 lg:p-12 flex flex-col items-start justify-center z-10">
-        <div className="flex items-center">
+      {/* Left Side Content*/}
+      <div className="w-full lg:w-1/2 text-white p-4 lg:p-6 flex flex-col items-center justify-center z-10">
+        <div className="flex items-center justify-center mr-14">
           <img
-            src={Ruthi_logo}
+            src={Ruthi_full_Logo}
             alt="Ruthi Logo"
-            className="w-20 lg:w-24 h-auto"
+            className="w-24 lg:w-64 h-auto mb-3"
           />
-          <h1 className="text-3xl lg:text-5xl font-bold text-start">
-            Ruthi
-          </h1>
         </div>
-        <p className="leading-normal text-2xl text-start">
-         Welcome back! Please enter your details.
+        <p className="text-base lg:text-xl max-w-xs lg:max-w-sm leading-relaxed text-start">
+          Welcome back! Please enter your details.
         </p>
       </div>
 
-      <div className="w-full lg:w-[55%] flex items-center justify-center p-4 lg:p-8 relative">
-        <div className="fixed inset-0 overflow-hidden z-0 hidden lg:block">
-          <img
-            src={wavesNegative}
-            alt="SVG Curve"
-            className="absolute right-0 top-0 h-full w-full object-cover"
-            style={{ transform: "rotate(90deg)" }}
-          />
-          </div>
-        </div>
-
-      <div className="w-full lg:w-2/3 flex items-center justify-center p-6 lg:p-12 z-10">
-        <div className="p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-orange-600 text-center">
+      {/* Right Side Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative">
+        <div className="relative p-4 lg:p-6 rounded-lg w-full max-w-md z-10 lg:mr-8 shadow-lg bg-white opacity-90">
+          <h2 className="text-2xl lg:text-3xl font-bold text-blue-700 mb-4">
             Sign In
           </h2>
-          <form>
+          <form className="space-y-3 mb-2">
             {fields.map((field) => (
               <InputField
                 key={field.id}
@@ -112,11 +99,15 @@ export default function Login() {
                 Forgot password?
               </a>
             </div>
-            <FormAction handleClick={handleClick} text="Sign In" />
+            <FormAction
+              handleClick={handleClick}
+              text="Sign In"
+              customStyles="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            />
           </form>
-          <p className="mt-8 text-sm text-gray-600 text-center">
+          <p className="mt-4 text-sm text-gray-600 text-center">
             Not a user?{" "}
-            <a href="/signup" className="text-blue-600 hover:text-blue-500 font-medium">
+            <a href="/signup" className="text-blue-700 font-semibold">
               Sign up
             </a>
           </p>

@@ -4,7 +4,7 @@ import Nav from "../components/core/Nav"
 export default function SignupPage() {
     return (
         <>  
-            <Nav />
+            {/* <Nav /> */}
             <Signup />
         </>
     )

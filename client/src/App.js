@@ -13,7 +13,6 @@ import { NextUIProvider } from "@nextui-org/react";
 import Jobs from "./views/Jobs";
 import VideoRecorder from "./components/VideoRecorder";
 import NewInterview from "./views/NewInterview";
-import NewLandingPage from "./views/NewLanding";
 import LandingPage from "./components/Test";
 import LandingTest from "./components/LandingTest"
 import VerificationPage from "./views/Verification";
@@ -39,7 +38,6 @@ function App() {
             {/* <Route path="/interview" element={<InterviewPage />} /> */}
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/new-interview" element={<NewInterview />} />
-            <Route path="/new-landing" element={<NewLandingPage />} />
             <Route path="/verification" element={<VerificationPage />} />
             <Route path="/verify-email-prompt" element={<VerifyEmailPrompt />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

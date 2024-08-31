@@ -149,6 +149,13 @@ export default function Signup() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
+      {notification && (
+        <NotificationBanner
+          message={notification.message}
+          type={notification.type}
+          onClose={closeNotification}
+        />
+      )}
       {/* Left Side */}
       <div className="w-full lg:w-1/3 bg-blue-900 text-white p-6 lg:p-8 flex flex-col items-start justify-center z-10">
         <div className="flex items-center">
@@ -240,14 +247,6 @@ export default function Signup() {
           </p>
         </div>
       </div>
-
-      {notification && (
-        <NotificationBanner
-          message={notification.message}
-          type={notification.type}
-          onClose={closeNotification}
-        />
-      )}
     </div>
   );
 }

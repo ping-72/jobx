@@ -19,6 +19,7 @@ import VerificationPage from "./views/Verification";
 import VerifyEmailPrompt from "./views/VerifyEmail";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import SidebarDemo from "./views/SidebarDemo";
 // import ColorPaletteProvider from './components/ColorPaletteProvider';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/verify-email-prompt" element={<VerifyEmailPrompt />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/profile" element={<SidebarDemo />} />
           </Routes>
         </BrowserRouter>
       </NextUIProvider>

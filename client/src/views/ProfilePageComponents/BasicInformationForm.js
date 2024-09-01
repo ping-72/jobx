@@ -15,7 +15,6 @@ const BasicInformationForm = () => {
                   <input
                     type="text"
                     id="firstName"
-                    placeholder="John"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -24,7 +23,6 @@ const BasicInformationForm = () => {
                   <input
                     type="text"
                     id="lastName"
-                    placeholder="Doe"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -34,7 +32,6 @@ const BasicInformationForm = () => {
                 <input
                   type="email"
                   id="email"
-                  placeholder="johndoe@example.com"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -43,7 +40,6 @@ const BasicInformationForm = () => {
                 <input
                   type="tel"
                   id="phone"
-                  placeholder="(123) 456-7890"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -62,7 +58,6 @@ const BasicInformationForm = () => {
                 <input
                   type="url"
                   id="github"
-                  placeholder="https://github.com/username"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -71,7 +66,6 @@ const BasicInformationForm = () => {
                 <input
                   type="url"
                   id="linkedin"
-                  placeholder="https://linkedin.com/in/username"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -80,7 +74,6 @@ const BasicInformationForm = () => {
                 <input
                   type="url"
                   id="twitter"
-                  placeholder="https://twitter.com/username"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -89,7 +82,6 @@ const BasicInformationForm = () => {
                 <input
                   type="url"
                   id="website"
-                  placeholder="https://yourwebsite.com"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>

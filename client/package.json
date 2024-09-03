@@ -11,6 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@tremor/react": "^3.12.2",
     "axios": "^1.6.0",
+    "clsx": "^2.1.1",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.263.1",
     "react": "^18.2.0",
@@ -22,6 +23,7 @@
     "react-type-animation": "^3.2.0",
     "react-typing-effect": "^2.0.5",
     "react-webcam": "^7.2.0",
+    "tailwind-merge": "^2.5.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

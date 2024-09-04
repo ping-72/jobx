@@ -1,0 +1,525 @@
+[
+     {
+          "company_name": "Tech Innovators Ltd.",
+          "image_link": "https://company.com/images/logo.png",
+          "position": "Software Developer",
+          "notice_period": "2 months",
+          "location": "New York, NY",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "3-5 years",
+          "working_hours": "9 AM - 5 PM",
+          "must_have_skills": [
+               "Java",
+               "Python",
+               "C++"
+          ],
+          "good_to_have_skills": [
+               "AWS",
+               "Docker",
+               "Kubernetes"
+          ],
+          "role": "Full-stack software development, collaborating with cross-functional teams to deliver high-quality software solutions.",
+          "about_us": "Tech Innovators Ltd. is a leading technology company specializing in innovative software solutions for a global clientele.",
+          "what_will_you_do": "Develop and maintain software applications, participate in code reviews, and work closely with product teams.",
+          "who_are_you": "A passionate and skilled developer with a knack for problem-solving and a strong background in software engineering.",
+          "why_us": "Join us to work on cutting-edge technology projects, with opportunities for professional growth and a collaborative work environment.",
+          "application_link": "https://company.com/careers/software-developer",
+          "linked_profile": "https://www.linkedin.com/company/tech-innovators-ltd/"
+     },
+     {
+          "company_name": "Creative Solutions Inc.",
+          "image_link": "https://company.com/images/logo_creative.png",
+          "position": "Frontend Developer",
+          "notice_period": "1 month",
+          "location": "San Francisco, CA",
+          "onsite_remote": "Remote",
+          "years_of_experience": "1-2 years",
+          "working_hours": "10 AM - 6 PM",
+          "must_have_skills": [
+               "HTML",
+               "CSS",
+               "JavaScript",
+               "React.js"
+          ],
+          "good_to_have_skills": [
+               "Tailwind CSS",
+               "Redux",
+               "GraphQL"
+          ],
+          "role": "Design and implement responsive web interfaces, ensuring cross-browser compatibility and optimized performance.",
+          "about_us": "Creative Solutions Inc. is a design-focused tech company creating seamless user experiences across various digital platforms.",
+          "what_will_you_do": "Work on building and enhancing the frontend of our web applications, collaborating with designers and backend developers.",
+          "who_are_you": "A creative and detail-oriented frontend developer who enjoys building visually appealing and user-friendly web interfaces.",
+          "why_us": "We offer a flexible remote work environment, competitive salary, and opportunities to work on exciting projects.",
+          "application_link": "https://company.com/careers/frontend-developer",
+          "linked_profile": "https://www.linkedin.com/company/creative-solutions-inc/"
+     },
+     {
+          "company_name": "Data Pioneers",
+          "image_link": "https://company.com/images/logo_data_pioneers.png",
+          "position": "Data Analyst",
+          "notice_period": "Immediate",
+          "location": "Austin, TX",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "2-4 years",
+          "working_hours": "8 AM - 4 PM",
+          "must_have_skills": [
+               "SQL",
+               "Excel",
+               "Tableau"
+          ],
+          "good_to_have_skills": [
+               "Python",
+               "R",
+               "Power BI"
+          ],
+          "role": "Analyze data sets to provide actionable insights, create reports, and support decision-making processes.",
+          "about_us": "Data Pioneers is a fast-growing company that helps organizations turn data into a strategic asset.",
+          "what_will_you_do": "Gather and analyze data, create visualizations, and present findings to stakeholders.",
+          "who_are_you": "A data enthusiast with a strong analytical mindset and a passion for turning data into meaningful insights.",
+          "why_us": "Join a dynamic team in a company that values innovation and offers opportunities for growth and development.",
+          "application_link": "https://company.com/careers/data-analyst",
+          "linked_profile": "https://www.linkedin.com/company/data-pioneers/"
+     },
+     {
+          "company_name": "Eco Ventures",
+          "image_link": "https://company.com/images/logo_eco_ventures.png",
+          "position": "Sustainability Consultant",
+          "notice_period": "3 months",
+          "location": "Seattle, WA",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "5-7 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Sustainability Reporting",
+               "Environmental Policy",
+               "Project Management"
+          ],
+          "good_to_have_skills": [
+               "LEED Certification",
+               "Renewable Energy Knowledge",
+               "Corporate Social Responsibility"
+          ],
+          "role": "Advise companies on sustainability practices, manage sustainability projects, and contribute to environmental policy development.",
+          "about_us": "Eco Ventures is dedicated to helping businesses achieve their sustainability goals through innovative and practical solutions.",
+          "what_will_you_do": "Lead sustainability projects, work with clients to improve their environmental impact, and ensure compliance with regulations.",
+          "who_are_you": "A sustainability expert with a deep understanding of environmental issues and a commitment to creating a better world.",
+          "why_us": "Be part of a mission-driven company with a strong focus on environmental impact and corporate responsibility.",
+          "application_link": "https://company.com/careers/sustainability-consultant",
+          "linked_profile": "https://www.linkedin.com/company/eco-ventures/"
+     },
+     {
+          "company_name": "Tech Innovators Ltd.",
+          "image_link": "https://company.com/images/logo.png",
+          "position": "Software Developer",
+          "notice_period": "2 months",
+          "location": "New York, NY",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "3-5 years",
+          "working_hours": "9 AM - 5 PM",
+          "must_have_skills": [
+               "Java",
+               "Python",
+               "C++"
+          ],
+          "good_to_have_skills": [
+               "AWS",
+               "Docker",
+               "Kubernetes"
+          ],
+          "role": "Full-stack software development, collaborating with cross-functional teams to deliver high-quality software solutions.",
+          "about_us": "Tech Innovators Ltd. is a leading technology company specializing in innovative software solutions for a global clientele.",
+          "what_will_you_do": "Develop and maintain software applications, participate in code reviews, and work closely with product teams.",
+          "who_are_you": "A passionate and skilled developer with a knack for problem-solving and a strong background in software engineering.",
+          "why_us": "Join us to work on cutting-edge technology projects, with opportunities for professional growth and a collaborative work environment.",
+          "application_link": "https://company.com/careers/software-developer",
+          "linked_profile": "https://www.linkedin.com/company/tech-innovators-ltd/"
+     },
+     {
+          "company_name": "Creative Solutions Inc.",
+          "image_link": "https://company.com/images/logo_creative.png",
+          "position": "Frontend Developer",
+          "notice_period": "1 month",
+          "location": "San Francisco, CA",
+          "onsite_remote": "Remote",
+          "years_of_experience": "1-2 years",
+          "working_hours": "10 AM - 6 PM",
+          "must_have_skills": [
+               "HTML",
+               "CSS",
+               "JavaScript",
+               "React.js"
+          ],
+          "good_to_have_skills": [
+               "Tailwind CSS",
+               "Redux",
+               "GraphQL"
+          ],
+          "role": "Design and implement responsive web interfaces, ensuring cross-browser compatibility and optimized performance.",
+          "about_us": "Creative Solutions Inc. is a design-focused tech company creating seamless user experiences across various digital platforms.",
+          "what_will_you_do": "Work on building and enhancing the frontend of our web applications, collaborating with designers and backend developers.",
+          "who_are_you": "A creative and detail-oriented frontend developer who enjoys building visually appealing and user-friendly web interfaces.",
+          "why_us": "We offer a flexible remote work environment, competitive salary, and opportunities to work on exciting projects.",
+          "application_link": "https://company.com/careers/frontend-developer",
+          "linked_profile": "https://www.linkedin.com/company/creative-solutions-inc/"
+     },
+     {
+          "company_name": "Data Pioneers",
+          "image_link": "https://company.com/images/logo_data_pioneers.png",
+          "position": "Data Analyst",
+          "notice_period": "Immediate",
+          "location": "Austin, TX",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "2-4 years",
+          "working_hours": "8 AM - 4 PM",
+          "must_have_skills": [
+               "SQL",
+               "Excel",
+               "Tableau"
+          ],
+          "good_to_have_skills": [
+               "Python",
+               "R",
+               "Power BI"
+          ],
+          "role": "Analyze data sets to provide actionable insights, create reports, and support decision-making processes.",
+          "about_us": "Data Pioneers is a fast-growing company that helps organizations turn data into a strategic asset.",
+          "what_will_you_do": "Gather and analyze data, create visualizations, and present findings to stakeholders.",
+          "who_are_you": "A data enthusiast with a strong analytical mindset and a passion for turning data into meaningful insights.",
+          "why_us": "Join a dynamic team in a company that values innovation and offers opportunities for growth and development.",
+          "application_link": "https://company.com/careers/data-analyst",
+          "linked_profile": "https://www.linkedin.com/company/data-pioneers/"
+     },
+     {
+          "company_name": "Eco Ventures",
+          "image_link": "https://company.com/images/logo_eco_ventures.png",
+          "position": "Sustainability Consultant",
+          "notice_period": "3 months",
+          "location": "Seattle, WA",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "5-7 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Sustainability Reporting",
+               "Environmental Policy",
+               "Project Management"
+          ],
+          "good_to_have_skills": [
+               "LEED Certification",
+               "Renewable Energy Knowledge",
+               "Corporate Social Responsibility"
+          ],
+          "role": "Advise companies on sustainability practices, manage sustainability projects, and contribute to environmental policy development.",
+          "about_us": "Eco Ventures is dedicated to helping businesses achieve their sustainability goals through innovative and practical solutions.",
+          "what_will_you_do": "Lead sustainability projects, work with clients to improve their environmental impact, and ensure compliance with regulations.",
+          "who_are_you": "A sustainability expert with a deep understanding of environmental issues and a commitment to creating a better world.",
+          "why_us": "Be part of a mission-driven company with a strong focus on environmental impact and corporate responsibility.",
+          "application_link": "https://company.com/careers/sustainability-consultant",
+          "linked_profile": "https://www.linkedin.com/company/eco-ventures/"
+     },
+     {
+          "company_name": "CloudStream Technologies",
+          "image_link": "https://company.com/images/logo_cloudstream.png",
+          "position": "DevOps Engineer",
+          "notice_period": "2 months",
+          "location": "Boston, MA",
+          "onsite_remote": "Remote",
+          "years_of_experience": "3-4 years",
+          "working_hours": "9 AM - 6 PM",
+          "must_have_skills": [
+               "AWS",
+               "CI/CD",
+               "Docker",
+               "Kubernetes"
+          ],
+          "good_to_have_skills": [
+               "Terraform",
+               "Ansible",
+               "Jenkins"
+          ],
+          "role": "Design, implement, and manage CI/CD pipelines, automate infrastructure, and support cloud deployments.",
+          "about_us": "CloudStream Technologies specializes in providing cloud-native solutions and DevOps automation to leading enterprises.",
+          "what_will_you_do": "Implement and manage infrastructure as code, automate deployment processes, and work on cloud infrastructure optimization.",
+          "who_are_you": "An experienced DevOps Engineer with a passion for automation and cloud technologies.",
+          "why_us": "We offer a dynamic work environment, opportunities for learning, and the ability to work on high-impact projects.",
+          "application_link": "https://company.com/careers/devops-engineer",
+          "linked_profile": "https://www.linkedin.com/company/cloudstream-technologies/"
+     },
+     {
+          "company_name": "Quantum AI Solutions",
+          "image_link": "https://company.com/images/logo_quantum_ai.png",
+          "position": "Machine Learning Engineer",
+          "notice_period": "3 months",
+          "location": "Los Angeles, CA",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "4-6 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Python",
+               "TensorFlow",
+               "PyTorch",
+               "NLP"
+          ],
+          "good_to_have_skills": [
+               "Reinforcement Learning",
+               "Deep Learning",
+               "Computer Vision"
+          ],
+          "role": "Design and develop machine learning models, perform data preprocessing, and optimize algorithms for performance.",
+          "about_us": "Quantum AI Solutions is at the forefront of AI innovation, developing cutting-edge machine learning solutions for various industries.",
+          "what_will_you_do": "Collaborate with data scientists and software engineers to implement and deploy machine learning models.",
+          "who_are_you": "A passionate machine learning engineer with deep knowledge of AI and a drive to solve complex problems.",
+          "why_us": "Work with a team of AI experts on challenging projects that push the boundaries of technology.",
+          "application_link": "https://company.com/careers/machine-learning-engineer",
+          "linked_profile": "https://www.linkedin.com/company/quantum-ai-solutions/"
+     },
+     {
+          "company_name": "HealthTech Innovations",
+          "image_link": "https://company.com/images/logo_healthtech.png",
+          "position": "Backend Developer",
+          "notice_period": "1 month",
+          "location": "Chicago, IL",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "2-3 years",
+          "working_hours": "9 AM - 5 PM",
+          "must_have_skills": [
+               "Node.js",
+               "Express.js",
+               "MongoDB",
+               "REST APIs"
+          ],
+          "good_to_have_skills": [
+               "GraphQL",
+               "Docker",
+               "Redis"
+          ],
+          "role": "Develop and maintain backend services, ensure scalability and reliability, and work closely with frontend developers.",
+          "about_us": "HealthTech Innovations is a healthcare technology company focused on building secure and reliable software for the medical industry.",
+          "what_will_you_do": "Write and optimize backend code, manage databases, and integrate with third-party services.",
+          "who_are_you": "A backend developer with a solid understanding of server-side technologies and a passion for healthcare.",
+          "why_us": "Join a company that is making a difference in healthcare through technology, with opportunities to work on impactful projects.",
+          "application_link": "https://company.com/careers/backend-developer",
+          "linked_profile": "https://www.linkedin.com/company/healthtech-innovations/"
+     },
+     {
+          "company_name": "GreenEnergy Solutions",
+          "image_link": "https://company.com/images/logo_greenenergy.png",
+          "position": "Renewable Energy Engineer",
+          "notice_period": "Immediate",
+          "location": "Denver, CO",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "3-5 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Solar Energy",
+               "Wind Energy",
+               "Energy Storage Systems"
+          ],
+          "good_to_have_skills": [
+               "Project Management",
+               "AutoCAD",
+               "Electrical Engineering"
+          ],
+          "role": "Design and implement renewable energy systems, conduct feasibility studies, and manage energy projects.",
+          "about_us": "GreenEnergy Solutions is dedicated to advancing renewable energy technologies and promoting sustainability.",
+          "what_will_you_do": "Work on innovative renewable energy projects, collaborate with teams, and contribute to a greener future.",
+          "who_are_you": "An engineer passionate about renewable energy with the technical expertise to design and implement energy solutions.",
+          "why_us": "Be part of a company committed to sustainability and innovation in the renewable energy sector.",
+          "application_link": "https://company.com/careers/renewable-energy-engineer",
+          "linked_profile": "https://www.linkedin.com/company/greenenergy-solutions/"
+     },
+     {
+          "company_name": "Global Finance Group",
+          "image_link": "https://company.com/images/logo_global_finance.png",
+          "position": "Financial Analyst",
+          "notice_period": "2 months",
+          "location": "New York, NY",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "2-4 years",
+          "working_hours": "9 AM - 5 PM",
+          "must_have_skills": [
+               "Financial Modeling",
+               "Excel",
+               "SQL"
+          ],
+          "good_to_have_skills": [
+               "Python",
+               "VBA",
+               "Tableau"
+          ],
+          "role": "Analyze financial data, create financial models, and provide insights to support business decisions.",
+          "about_us": "Global Finance Group is a leading financial services firm offering a wide range of investment and advisory services.",
+          "what_will_you_do": "Perform financial analysis, develop models, and work closely with senior management to inform strategic decisions.",
+          "who_are_you": "A detail-oriented financial analyst with strong analytical skills and a passion for finance.",
+          "why_us": "Join a prestigious firm with opportunities for growth and the chance to work on high-profile financial projects.",
+          "application_link": "https://company.com/careers/financial-analyst",
+          "linked_profile": "https://www.linkedin.com/company/global-finance-group/"
+     },
+     {
+          "company_name": "Urban Architects",
+          "image_link": "https://company.com/images/logo_urban_architects.png",
+          "position": "Architect",
+          "notice_period": "3 months",
+          "location": "San Francisco, CA",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "5-7 years",
+          "working_hours": "8 AM - 4 PM",
+          "must_have_skills": [
+               "AutoCAD",
+               "Revit",
+               "SketchUp",
+               "Project Management"
+          ],
+          "good_to_have_skills": [
+               "LEED Certification",
+               "Sustainable Design",
+               "3D Modeling"
+          ],
+          "role": "Design and manage architectural projects, create detailed plans, and collaborate with construction teams.",
+          "about_us": "Urban Architects is a leading architecture firm known for its innovative designs and commitment to sustainability.",
+          "what_will_you_do": "Lead architectural projects, ensure design excellence, and work on sustainable building solutions.",
+          "who_are_you": "An experienced architect with a passion for design and a strong background in project management.",
+          "why_us": "Be part of a creative team that values innovation and sustainability in architecture.",
+          "application_link": "https://company.com/careers/architect",
+          "linked_profile": "https://www.linkedin.com/company/urban-architects/"
+     },
+     {
+          "company_name": "TechSavvy Solutions",
+          "image_link": "https://company.com/images/logo_techsavvy.png",
+          "position": "IT Support Specialist",
+          "notice_period": "Immediate",
+          "location": "Dallas, TX",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "1-3 years",
+          "working_hours": "9 AM - 6 PM",
+          "must_have_skills": [
+               "Windows",
+               "Linux",
+               "Networking",
+               "Troubleshooting"
+          ],
+          "good_to_have_skills": [
+               "AWS",
+               "Azure",
+               "Scripting"
+          ],
+          "role": "Provide technical support to end-users, manage IT infrastructure, and troubleshoot hardware and software issues.",
+          "about_us": "TechSavvy Solutions provides comprehensive IT services to businesses of all sizes, ensuring seamless technology operations.",
+          "what_will_you_do": "Respond to support requests, manage servers and networks, and ensure IT systems are running smoothly.",
+          "who_are_you": "A problem solver with a strong technical background and a commitment to providing excellent IT support.",
+          "why_us": "Join a dynamic team in a fast-paced environment, with opportunities for growth and professional development.",
+          "application_link": "https://company.com/careers/it-support-specialist",
+          "linked_profile": "https://www.linkedin.com/company/techsavvy-solutions/"
+     },
+     {
+          "company_name": "InnoSoft Corp.",
+          "image_link": "https://company.com/images/logo_innosoft.png",
+          "position": "UX/UI Designer",
+          "notice_period": "1 month",
+          "location": "Portland, OR",
+          "onsite_remote": "Remote",
+          "years_of_experience": "3-5 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Figma",
+               "Adobe XD",
+               "Sketch",
+               "Prototyping"
+          ],
+          "good_to_have_skills": [
+               "HTML",
+               "CSS",
+               "JavaScript"
+          ],
+          "role": "Design user interfaces, create wireframes and prototypes, and collaborate with developers to implement designs.",
+          "about_us": "InnoSoft Corp. is a software development company specializing in creating intuitive and user-friendly software solutions.",
+          "what_will_you_do": "Create and refine UI designs, work closely with developers, and ensure a seamless user experience.",
+          "who_are_you": "A creative and detail-oriented designer with a strong portfolio of UX/UI design work.",
+          "why_us": "Join a company that values creativity and user-centered design, with opportunities to work on exciting projects.",
+          "application_link": "https://company.com/careers/ux-ui-designer",
+          "linked_profile": "https://www.linkedin.com/company/innosoft-corp/"
+     },
+     {
+          "company_name": "RetailTech Group",
+          "image_link": "https://company.com/images/logo_retailtech.png",
+          "position": "E-commerce Manager",
+          "notice_period": "2 months",
+          "location": "Miami, FL",
+          "onsite_remote": "Onsite",
+          "years_of_experience": "4-6 years",
+          "working_hours": "9 AM - 5 PM",
+          "must_have_skills": [
+               "E-commerce Platforms",
+               "Digital Marketing",
+               "SEO",
+               "Analytics"
+          ],
+          "good_to_have_skills": [
+               "Shopify",
+               "Magento",
+               "PPC Advertising"
+          ],
+          "role": "Manage and optimize e-commerce platforms, develop digital marketing strategies, and drive online sales.",
+          "about_us": "RetailTech Group is a leading provider of e-commerce solutions, helping businesses grow their online presence.",
+          "what_will_you_do": "Oversee e-commerce operations, implement marketing campaigns, and analyze performance metrics.",
+          "who_are_you": "An experienced e-commerce professional with a passion for digital marketing and a track record of driving online sales.",
+          "why_us": "Work with a dynamic team in a company that is at the forefront of e-commerce innovation.",
+          "application_link": "https://company.com/careers/e-commerce-manager",
+          "linked_profile": "https://www.linkedin.com/company/retailtech-group/"
+     },
+     {
+          "company_name": "EduTech Innovators",
+          "image_link": "https://company.com/images/logo_edutech.png",
+          "position": "Content Developer",
+          "notice_period": "Immediate",
+          "location": "Remote",
+          "onsite_remote": "Remote",
+          "years_of_experience": "2-4 years",
+          "working_hours": "Flexible",
+          "must_have_skills": [
+               "Content Writing",
+               "Instructional Design",
+               "E-learning Platforms"
+          ],
+          "good_to_have_skills": [
+               "Video Editing",
+               "Graphic Design",
+               "SEO"
+          ],
+          "role": "Create educational content, develop instructional materials, and work on e-learning course development.",
+          "about_us": "EduTech Innovators is an education technology company focused on developing innovative e-learning solutions.",
+          "what_will_you_do": "Develop engaging educational content, work with subject matter experts, and design e-learning courses.",
+          "who_are_you": "A creative content developer with experience in instructional design and a passion for education.",
+          "why_us": "Join a company dedicated to transforming education through technology, with opportunities for creativity and innovation.",
+          "application_link": "https://company.com/careers/content-developer",
+          "linked_profile": "https://www.linkedin.com/company/edutech-innovators/"
+     },
+     {
+          "company_name": "BlueOcean Consulting",
+          "image_link": "https://company.com/images/logo_blueocean.png",
+          "position": "Business Consultant",
+          "notice_period": "3 months",
+          "location": "Boston, MA",
+          "onsite_remote": "Hybrid",
+          "years_of_experience": "5-7 years",
+          "working_hours": "8 AM - 4 PM",
+          "must_have_skills": [
+               "Consulting",
+               "Business Strategy",
+               "Data Analysis",
+               "Client Management"
+          ],
+          "good_to_have_skills": [
+               "MBA",
+               "Change Management",
+               "Process Improvement"
+          ],
+          "role": "Advise clients on business strategies, conduct market research, and develop action plans to achieve business goals.",
+          "about_us": "BlueOcean Consulting provides expert business consulting services to companies across various industries.",
+          "what_will_you_do": "Work with clients to solve business challenges, develop strategies, and drive business growth.",
+          "who_are_you": "An experienced business consultant with strong analytical skills and a track record of successful client engagements.",
+          "why_us": "Join a prestigious consulting firm with opportunities to work on high-impact projects and grow your career.",
+          "application_link": "https://company.com/careers/business-consultant",
+          "linked_profile": "https://www.linkedin.com/company/blueocean-consulting/"
+     }
+]
